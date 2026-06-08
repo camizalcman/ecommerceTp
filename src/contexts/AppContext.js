@@ -11,7 +11,10 @@ export const AppContextProvider = ({children}) => {
     const [activeUser, setActiveUser] = useState(null);
 
     //Funciones del carrito
-    
+    //ME FALTA TERMINAR
+    const removeFromCart = (cartItemId) => {
+        setCart(cart.filter(item => item.cartItemId !== cartItemId))
+    }
 
     //Funciones de favorites
     const addFavorite = (data) => {
