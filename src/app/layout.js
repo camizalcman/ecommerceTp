@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono } from "next/font/google";
+import { AppContextProvider } from "@/contexts/AppContext";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -27,9 +28,11 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar />
-        {children}
-        <Footer />
+        <AppContextProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </AppContextProvider>
       </body>
     </html>
   );

@@ -29,7 +29,7 @@ export const AppContextProvider = ({children}) => {
         return favorites.some(fav => fav._id === productId)
     }
 
-    const favoritosQty = () => favorites.length
+    const favoritesQty = () => favorites.length
 
     //Funciones de user
     const login = (userData) => setActiveUser(userData)
@@ -44,7 +44,7 @@ export const AppContextProvider = ({children}) => {
     return (
         //va a exportar un componente que se llama app context y utiliza el metodo provider
         //value son las cosas que queres dejar publicas y exportar
-        <AppContext.Provider value={{ favoritos, setFavoritos, favoritosQty, handleAddFavorite}}>
+        <AppContext.Provider value={{favorites, setFavorites, favoritesQty, addFavorite, removeFavorite, isFavorite, cart, setCart, removeFromCart, activeUser, login, logout }}>
             {children}
         </AppContext.Provider>
     )
