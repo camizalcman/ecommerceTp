@@ -34,6 +34,19 @@ const productSchema = new mongoose.Schema(
         ref: "Category",
       },
     ],
+    options: [
+      {
+        name: { type: String, required: true },
+        multiple: { type: Boolean, default: false },
+        max: { type: Number, default: null },
+        values: [
+          {
+            label: { type: String, required: true },
+            price: { type: Number, default: 0 }, //ver como resolver el tema precios
+          }
+        ],
+      }
+    ],
   },
   {
     timestamps: true,
