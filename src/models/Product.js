@@ -12,7 +12,7 @@ const productSchema = new mongoose.Schema(
       default: "",
       trim: true,
     },
-    price: {
+    /*price: {
       type: Number,
       required: true,
       min: 0,
@@ -22,7 +22,7 @@ const productSchema = new mongoose.Schema(
       required: true,
       min: 0,
       default: 0,
-    },
+    },*/
     image: {
       type: String,
       default: "",
@@ -34,19 +34,16 @@ const productSchema = new mongoose.Schema(
         ref: "Category",
       },
     ],
-    options: [
+    sizes: [          
       {
-        name: { type: String, required: true },
-        multiple: { type: Boolean, default: false },
-        max: { type: Number, default: null },
-        values: [
-          {
-            label: { type: String, required: true },
-            price: { type: Number, default: 0 }, //ver como resolver el tema precios
-          }
-        ],
+        label: { type: String, required: true },
+        price: { type: Number, required: true },
       }
     ],
+    dough: [String],
+    mozzarellas: [String],
+    toppings: [String],
+    box: [String],
   },
   {
     timestamps: true,

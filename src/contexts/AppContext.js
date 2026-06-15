@@ -16,6 +16,27 @@ export const AppContextProvider = ({children}) => {
         setCart(cart.filter(item => item.cartItemId !== cartItemId))
     }
 
+    const addToCart = (product, customizations, quantity) => {
+        const cartItemId = `${product._id}-${JSON.stringify(customizations)}`;
+        const exists = cart.find(item => item.cartItemId === cartItemId);
+
+        if (exists) {
+            updateQuantity(cartItemId, exists.quantity + quantity);
+        } else {
+            const cartItem = {
+                _id: product._id,
+                name: product.name,
+                image: product.image,
+                price: product.price,
+                quantity: quantity,
+                customizations: customizations,
+                subtotal: product.price * quantity,
+                cartItemId: cartItemId,
+            };
+            setCart([...cart, cartItem]);
+        }
+    };
+
     //Funciones de favorites
     const addFavorite = (data) => {
         setFavorites([...favorites, data])
@@ -44,7 +65,7 @@ export const AppContextProvider = ({children}) => {
     return (
         //va a exportar un componente que se llama app context y utiliza el metodo provider
         //value son las cosas que queres dejar publicas y exportar
-        <AppContext.Provider value={{favorites, setFavorites, favoritesQty, addFavorite, removeFavorite, isFavorite, cart, setCart, removeFromCart, activeUser, login, logout }}>
+        <AppContext.Provider value={{favorites, setFavorites, favoritesQty, addFavorite, removeFavorite, isFavorite, cart, setCart, addToCart, removeFromCart, activeUser, login, logout }}>
             {children}
         </AppContext.Provider>
     )
