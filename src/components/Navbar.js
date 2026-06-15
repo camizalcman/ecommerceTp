@@ -15,7 +15,7 @@ export default function Navbar() {
   return (
     <header className="border-b border-slate-200 bg-primary text-secondary">
       <nav className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-4 sm:flex-row sm:items-center sm:justify-between">
-        <Link className="text-lg font-semibold" href="/">
+        <Link className="text-lg font-semibold font-sora" href="/">
           Pizzeria
         </Link>
 
@@ -23,7 +23,7 @@ export default function Navbar() {
           {links.map((link) => (
             <Link
               key={link.href}
-              className="rounded-lg px-3 py-2 text-sm font-medium hover:bg-slate-100"
+              className="rounded-lg px-3 py-2 text-sm font-medium"
               href={link.href}
             >
               {link.label}
