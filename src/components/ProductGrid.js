@@ -28,7 +28,7 @@ export default function ProductGrid({ products = [] }) {
         <Link
           key={product._id}
           href={`/product/${product._id}`}
-          className="group block rounded-xl p-4 hover:bg-white/40 transition-colors duration-300" 
+          className="group block rounded-xl p-4 " 
         >
           <article>
 
@@ -50,7 +50,7 @@ export default function ProductGrid({ products = [] }) {
 
             <div className="mt-4">
               
-              <h2 className="text-lg font-semibold text-primary">
+              <h2 className="text-xl font-semibold text-primary font-sora">
                 {product.name}
               </h2>
 

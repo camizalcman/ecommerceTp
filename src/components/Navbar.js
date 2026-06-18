@@ -23,7 +23,7 @@ export default function Navbar() {
           {links.map((link) => (
             <Link
               key={link.href}
-              className="rounded-lg px-3 py-2 text-sm font-medium"
+              className="rounded-lg px-3 py-2 text-sm font-mediumyar"
               href={link.href}
             >
               {link.label}

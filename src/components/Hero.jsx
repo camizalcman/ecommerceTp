@@ -3,21 +3,26 @@ import Image from 'next/image';
 import { useState } from "react";
 
 const pizzas = [
-  { src: "/images/products/pizza.png", alt: "Pizza 1" },
-  { src: "/images/products/pizza1.png", alt: "Pizza 2" },
+  { src: "/images/products/pizza.png", alt: "Pizza" },
+  { src: "/images/products/pizza1.png", alt: "Pizza 1" },
+  { src: "/images/products/pizza2.png", alt: "Pizza 2" },
+  { src: "/images/products/pizza3.png", alt: "Pizza 3" },
+  { src: "/images/products/pizza4.png", alt: "Pizza 4" },
 ];
 
 const Hero = () => {
-  const [current, setCurrent] = useState(0);
-  const [animating, setAnimating] = useState(false);
+const [current, setCurrent] = useState(0);
+const [animating, setAnimating] = useState(false);
 
   const handleNext = () => {
     if (animating) return;
+
     setAnimating(true);
+
     setTimeout(() => {
       setCurrent((prev) => (prev + 1) % pizzas.length);
       setAnimating(false);
-    }, 600);
+    }, 500);
   };
 
   return (
@@ -34,32 +39,7 @@ const Hero = () => {
       </div>
 
       
-      <div className="w-1/2 flex flex-col items-center gap-4">
-        
-        
-        <div className="relative w-[400px] h-[400px]">
-          {pizzas.map((pizza, index) => (
-            <Image
-              key={index}
-              src={pizza.src}
-              alt={pizza.alt}
-              width={400}
-              height={400}
-              className="absolute top-0 left-0 transition-all duration-600"
-              style={{
-                opacity: index === current
-                  ? animating ? 0 : 1
-                  : animating ? 1 : 0,
-                transform: index === current
-                    ? animating ? "rotate(30deg)" : "rotate(0deg)"   // sale: 0 → 30
-                    : animating ? "rotate(0deg)" : "rotate(30deg)",  // entra: 30 → 0  
-                    transition: animating 
-
-              }}
-            />
-          ))}
-        </div>
-
+      <div className="w-1/2 flex flex-col items-center gap-2">
         
         <button
           onClick={handleNext}
@@ -67,6 +47,33 @@ const Hero = () => {
         >
           →
         </button>
+
+        <div className="relative w-[550px] h-[550px]">
+          {pizzas.map((pizza, index) => (
+            <Image
+              key={index}
+              src={pizza.src}
+              alt={pizza.alt}
+              width={550}
+              height={550}
+              className="absolute top-0 left-0 transition-all duration-800"
+              style={{
+                opacity:
+                  index === current
+                    ? (animating ? 0 : 1)
+                    : (animating && index === (current + 1) % pizzas.length ? 1 : 0),
+
+                transform:
+                  index === current
+                    ? (animating ? "rotate(30deg)" : "rotate(0deg)")
+                    : (animating && index === (current + 1) % pizzas.length
+                        ? "rotate(0deg)"
+                        : "rotate(0deg)"),
+              }}
+            />
+          ))}
+        </div>
+
 
       </div>
     </div>
