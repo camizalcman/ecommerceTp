@@ -36,6 +36,20 @@ const [animating, setAnimating] = useState(false);
         <h2 className="font-sora font-semibold text-primary text-2xl mt-4">
           Elegí tu pizza favorita o armá la tuya desde cero
         </h2>
+
+        <div className="flex gap-4 mt-8">
+          <button
+            className="bg-primary text-secondary rounded-full px-12 py-3 transition-all duration-300 hover:opacity-90 hover:scale-105"
+          >
+            Creá tu pizza
+          </button>
+
+          <button
+            className="border-2 border-primary text-primary rounded-full px-12 py-3 transition-all duration-300 hover:scale-105"
+          >
+            Ver menú
+          </button>
+        </div>
       </div>
 
       

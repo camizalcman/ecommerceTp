@@ -10,7 +10,7 @@ const Footer = () => {
                     
                     
 
-                    <h2 className='font-medium text-[1.8em] sm:text-[2em] md:text-[2.5em] font-[Oswald] text-white leading-none mt-2'>NOMBRE</h2>
+                    <h2 className='font-medium text-[1.8em] sm:text-[2em] md:text-[2.5em] font-sora text-white leading-none mt-2'>Pizzeria</h2>
 
                 </div>
 
