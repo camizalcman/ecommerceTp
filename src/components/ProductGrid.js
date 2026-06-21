@@ -28,7 +28,7 @@ export default function ProductGrid({ products = [] }) {
         <Link
           key={product._id}
           href={`/product/${product._id}`}
-          className="group block rounded-xl p-4 " 
+          className="group block rounded-xl p-4"
         >
           <article>
 
@@ -49,7 +49,7 @@ export default function ProductGrid({ products = [] }) {
             </div>
 
             <div className="mt-4">
-              
+
               <h2 className="text-xl font-semibold text-primary font-sora">
                 {product.name}
               </h2>
@@ -64,7 +64,7 @@ export default function ProductGrid({ products = [] }) {
                     typeof category === "string" ? null : (
                       <span
                         key={category._id}
-                        className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary" 
+                        className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary"
                       >
                         {category.name}
                       </span>
@@ -73,10 +73,15 @@ export default function ProductGrid({ products = [] }) {
                 </div>
               ) : null}
 
-              
-              <p className="mt-3 text-sm font-semibold text-primary">
-                desde ${product.price}
-              </p>
+              {product.sizes?.length ? (
+                <div className="mt-3 flex flex-col gap-1">
+                  {product.sizes.map((size) => (
+                    <p key={size.label} className="text-sm font-semibold text-primary">
+                      {size.label}: ${size.price}
+                    </p>
+                  ))}
+                </div>
+              ) : null}
 
             </div>
           </article>

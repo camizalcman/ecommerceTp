@@ -3,6 +3,7 @@ import ProductManager from "@/components/ProductManager";
 import { getCategories } from "@/lib/categories";
 import { getProducts } from "@/lib/products";
 
+
 export default async function ProductDashboardContainer() {
   const [categories, products] = await Promise.all([
     getCategories(),

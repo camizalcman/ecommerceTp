@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const boxSchema = new mongoose.Schema(
+const sauceSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, trim: true },
     image: { type: String, default: "" },
@@ -8,5 +8,5 @@ const boxSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Box = mongoose.models.Box || mongoose.model("Box", boxSchema);
-export default Box;
+const Sauce = mongoose.models.Sauce || mongoose.model("Sauce", sauceSchema);
+export default Sauce;

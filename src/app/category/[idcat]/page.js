@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ChevronLeft } from "lucide-react";
 
 import ProductGrid from "@/components/ProductGrid";
 import { getCategoryById } from "@/lib/categories";
@@ -21,17 +22,15 @@ export default async function CategoryProductsPage({ params }) {
     <main className="min-h-screen bg-slate-50 px-6 py-10 text-slate-900">
       <div className="mx-auto max-w-6xl">
         <Link
-          className="text-sm font-medium text-emerald-700 hover:text-emerald-900"
+          className="text-sm font-medium flex"
           href="/"
         >
+          <ChevronLeft className="w-6 h-6" />
           Volver al catalogo
         </Link>
 
         <section className="mb-8 mt-6">
-          <p className="text-sm uppercase tracking-[0.3em] text-emerald-500">
-            Categoria
-          </p>
-          <h1 className="mt-4 max-w-3xl text-4xl font-semibold">
+          <h1 className="mt-4 max-w-3xl text-4xl font-semibold font-sora text-primary">
             {category.name}
           </h1>
           {category.description ? (

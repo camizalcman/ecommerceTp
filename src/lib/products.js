@@ -8,9 +8,11 @@ function serializeProduct(product) {
     _id: product._id.toString(),
     name: product.name,
     description: product.description,
-    price: product.price,
-    stock: product.stock,
     image: product.image,
+    sizes: (product.sizes || []).map((size) => ({
+      label: size.label,
+      price: size.price,
+    })),
     categories: (product.categories || []).map((category) => {
       if (category?.name) {
         return serializeCategory(category);

@@ -40,10 +40,6 @@ const productSchema = new mongoose.Schema(
         price: { type: Number, required: true },
       }
     ],
-    dough: [String],
-    mozzarellas: [String],
-    toppings: [String],
-    box: [String],
   },
   {
     timestamps: true,

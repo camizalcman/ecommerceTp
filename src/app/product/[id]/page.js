@@ -3,7 +3,7 @@ import { getToppings } from "@/lib/toppings";
 import { getDoughs } from "@/lib/doughs";
 import { getSizes } from "@/lib/sizes";
 import { getMozzarellas } from "@/lib/mozzarellas";
-import { getBoxes } from "@/lib/boxes";
+import { getSauces } from "@/lib/sauces";
 import ProductDetail from "@/components/ProductDetail";
 
 export default async function ProductPage({ params }) {
@@ -23,15 +23,15 @@ export default async function ProductPage({ params }) {
   let options = {};
 
   if (isCustomizable) {
-    const [sizes, doughs, mozzarellas, toppings, boxes] = await Promise.all([
+    const [sizes, doughs, sauces, mozzarellas, toppings] = await Promise.all([
         getSizes(),
         getDoughs(),
+        getSauces(),
         getMozzarellas(),
         getToppings(),
-        getBoxes(),
     ]);
 
-    options = { toppings, doughs, sizes, mozzarellas, boxes };
+    options = { sizes, toppings, doughs, sauces, mozzarellas };
   } else {
     const sizes = await getSizes();
     options = { sizes };

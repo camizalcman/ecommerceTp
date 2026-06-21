@@ -16,10 +16,13 @@ import {
 const initialForm = {
   name: "",
   description: "",
-  price: "",
-  stock: "",
   image: "",
   categories: [],
+  sizes: [
+    { label: "Chica", price: "" },
+    { label: "Mediana", price: "" },
+    { label: "Grande", price: "" },
+  ],
 };
 
 export default function ProductManager({
@@ -61,11 +64,26 @@ export default function ProductManager({
     });
   }
 
+  function handleSizeChange(index, value) {
+    setForm((current) => {
+      const sizes = current.sizes.map((size, i) =>
+        i === index ? { ...size, price: value } : size
+      );
+      return { ...current, sizes };
+    });
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
     setIsSaving(true);
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData();
+    formData.append("name", form.name);
+    formData.append("description", form.description);
+    formData.append("image", form.image);
+    form.categories.forEach((id) => formData.append("categories", id));
+    formData.append("sizes", JSON.stringify(form.sizes));
+
     const action = editingId ? updateProduct.bind(null, editingId) : createProduct;
 
     try {
@@ -88,12 +106,13 @@ export default function ProductManager({
     setForm({
       name: product.name,
       description: product.description,
-      price: String(product.price),
-      stock: String(product.stock),
       image: product.image || "",
       categories: (product.categories || []).map((category) =>
         typeof category === "string" ? category : category._id
       ),
+      sizes: product.sizes?.length
+        ? product.sizes.map((s) => ({ ...s, price: String(s.price) }))
+        : initialForm.sizes,
     });
     setMessage("Editando producto.");
   }
@@ -142,32 +161,37 @@ export default function ProductManager({
           />
           <input
             className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none"
-            name="price"
-            placeholder="Precio"
-            type="number"
-            min="0"
-            step="0.01"
-            value={form.price}
-            onChange={handleChange}
-            required
-          />
-          <input
-            className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none"
-            name="stock"
-            placeholder="Stock"
-            type="number"
-            min="0"
-            value={form.stock}
-            onChange={handleChange}
-            required
-          />
-          <input
-            className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none"
             name="image"
-            placeholder="Nombre de imagen, ej: dummy.webp"
+            placeholder="Nombre de imagen, ej: pizza.png"
             value={form.image}
             onChange={handleChange}
           />
+
+          <fieldset className="rounded-lg border border-slate-300 px-4 py-3">
+            <legend className="px-1 text-sm font-medium text-slate-700">
+              Tamaños y precios
+            </legend>
+            <div className="grid gap-3">
+              {form.sizes.map((size, index) => (
+                <div key={size.label} className="flex items-center gap-3">
+                  <span className="w-24 shrink-0 text-sm text-slate-700">{size.label}</span>
+                  <div className="relative flex-1">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">$</span>
+                    <input
+                      className="w-full rounded-lg border border-slate-300 pl-7 pr-3 py-2 outline-none"
+                      type="number"
+                      min="0"
+                      placeholder="0"
+                      value={size.price}
+                      onChange={(e) => handleSizeChange(index, e.target.value)}
+                      required
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </fieldset>
+
           <fieldset className="rounded-lg border border-slate-300 px-4 py-3">
             <legend className="px-1 text-sm font-medium text-slate-700">
               Categorias
@@ -257,17 +281,17 @@ export default function ProductManager({
                 className="rounded-lg border border-slate-200 p-5"
               >
                 <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h3 className="text-xl font-semibold text-slate-900">{product.name}</h3>
-                    <p className="mt-2 text-sm text-slate-600">
-                      {product.description || "Sin descripcion"}
-                    </p>
-                  </div>
+                  <h3 className="text-xl font-semibold text-slate-900">{product.name}</h3>
                   <div className="text-right text-sm text-slate-700">
-                    <p>${product.price}</p>
-                    <p>Stock: {product.stock}</p>
+                    {product.sizes?.map((s) => (
+                      <p key={s.label}>{s.label}: ${s.price}</p>
+                    ))}
                   </div>
                 </div>
+
+                <p className="mt-2 text-sm text-slate-600">
+                  {product.description || "Sin descripcion"}
+                </p>
 
                 <p className="mt-3 break-all text-xs text-slate-500">
                   ID: {product._id}

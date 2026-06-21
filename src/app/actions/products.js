@@ -11,12 +11,14 @@ function getProductPayload(formData) {
   return {
     name: formData.get("name"),
     description: formData.get("description"),
-    price: Number(formData.get("price")),
-    stock: Number(formData.get("stock")),
     image: formData.get("image"),
     categories: formData
       .getAll("categories")
       .filter((categoryId) => mongoose.Types.ObjectId.isValid(categoryId)),
+       sizes: JSON.parse(formData.get("sizes") || "[]").map((size) => ({
+      label: size.label,
+      price: Number(size.price),
+    })),
   };
 }
 

@@ -8,9 +8,9 @@ export default function ProductDetail({ product, isCustomizable, options }) {
 
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedDough, setSelectedDough] = useState(null);
+   const [selectedSauce, setSelectedSauce] = useState(null);
   const [selectedMozzarella, setSelectedMozzarella] = useState(null);
   const [selectedToppings, setSelectedToppings] = useState([]);
-  const [selectedBox, setSelectedBox] = useState(null);
   const [quantity, setQuantity] = useState(1);
 
   const handleToppingToggle = (topping) => {
@@ -28,9 +28,9 @@ export default function ProductDetail({ product, isCustomizable, options }) {
       ? {
           size: selectedSize,
           dough: selectedDough,
+          sauce: selectedSauce,
           mozzarella: selectedMozzarella,
           toppings: selectedToppings,
-          box: selectedBox,
         }
       : { size: selectedSize };
 
@@ -56,7 +56,6 @@ export default function ProductDetail({ product, isCustomizable, options }) {
           {/* Info del producto */}
           <h1 className="text-3xl font-bold">{product.name}</h1>
           <p className="mt-2 text-gray-600">{product.description}</p>
-          <p className="mt-2 text-xl font-semibold">desde ${product.price}</p>
 
           {/* Tamaños */}
           <div className="mt-6">
@@ -95,6 +94,26 @@ export default function ProductDetail({ product, isCustomizable, options }) {
                       }`}
                     >
                       {dough.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Salsa */}
+              <div className="mt-6">
+                <h2 className="font-semibold text-lg">Salsa</h2>
+                <div className="flex flex-wrap gap-3 mt-2">
+                  {options.sauces?.map(sauce => (
+                    <button
+                      key={sauce._id}
+                      onClick={() => setSelectedSauce(sauce)}
+                      className={`px-3 py-2 text-sm rounded-full border transition-all duration-300 ${
+                        selectedSauce?._id === sauce._id
+                          ? "bg-primary border-primary text-secondary"
+                          : "border-gray-300 hover:bg-primary hover:border-primary hover:text-secondary"
+                      }`}
+                    >
+                      {sauce.name}
                     </button>
                   ))}
                 </div>
@@ -142,25 +161,6 @@ export default function ProductDetail({ product, isCustomizable, options }) {
                 </div>
               </div>
 
-              {/* Caja */}
-              <div className="mt-6">
-                <h2 className="font-semibold text-lg">Caja</h2>
-                <div className="flex flex-wrap gap-3 mt-2">
-                  {options.boxes?.map(box => (
-                    <button
-                      key={box._id}
-                      onClick={() => setSelectedBox(box)}
-                      className={`px-3 py-2 text-sm rounded-full border transition-all duration-300 ${
-                        selectedBox?._id === box._id
-                          ? "bg-primary border-primary text-secondary"
-                          : "border-gray-300 hover:bg-primary hover:border-primary hover:text-secondary"
-                      }`}
-                    >
-                      {box.name}
-                    </button>
-                  ))}
-                </div>
-              </div>
             </>
           )}
 
