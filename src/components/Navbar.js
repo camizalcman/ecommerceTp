@@ -13,7 +13,7 @@ export default function Navbar() {
       const { favoritesQty } = useAppContext()
       
   return (
-    <header className="border-b border-slate-200 bg-primary text-secondary">
+    <header className="border-b border-slate-200 bg-primary text-secondary sticky top-0 z-50">
       <nav className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-4 sm:flex-row sm:items-center sm:justify-between">
         <Link className="text-lg font-semibold font-sora" href="/">
           Pizzeria
