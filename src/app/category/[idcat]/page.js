@@ -19,7 +19,7 @@ export default async function CategoryProductsPage({ params }) {
   const products = await getProductsByCategory(category._id);
 
   return (
-    <main className="min-h-screen bg-slate-50 px-6 py-10 text-slate-900">
+    <main className="min-h-screen px-6 py-10 text-slate-900 bg-background">
       <div className="mx-auto max-w-6xl">
         <Link
           className="text-sm font-medium flex"

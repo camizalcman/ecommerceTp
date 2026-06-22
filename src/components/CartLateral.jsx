@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useAppContext } from "@/contexts/AppContext";
 
 export default function CartLateral() {
+  
   const {
     cart,
     isCartOpen,
@@ -13,7 +14,7 @@ export default function CartLateral() {
     cartTotal,
   } = useAppContext();
 
-   if (!isCartOpen) return null;
+  if (!isCartOpen) return null;
 
    return (
     <div className="fixed inset-0 z-[100] flex justify-end">
@@ -28,7 +29,7 @@ export default function CartLateral() {
       <div className="relative w-full max-w-md h-full bg-white shadow-xl flex flex-col">
 
         <div className="flex items-center justify-between p-6 border-b">
-          <h2 className="text-xl font-semibold text-primary font-sora">Tu carrito</h2>
+          <h2 className="text-xl font-semibold text-primary font-sora">Carrito</h2>
           <button onClick={closeCart} className="text-2xl text-slate-500 hover:text-slate-900">
             &times;
           </button>
@@ -78,14 +79,14 @@ export default function CartLateral() {
                   <div className="flex items-center gap-3 mt-2">
                     <button
                       onClick={() => updateQuantity(item.cartItemId, Math.max(1, item.quantity - 1))}
-                      className="w-7 h-7 border rounded-full text-sm"
+                      className="w-7 h-7 border rounded-full text-sm text-secondary bg-primary"
                     >
                       -
                     </button>
                     <span className="text-sm">{item.quantity}</span>
                     <button
                       onClick={() => updateQuantity(item.cartItemId, item.quantity + 1)}
-                      className="w-7 h-7 border rounded-full text-sm"
+                      className="w-7 h-7 rounded-full text-sm text-secondary bg-primary"
                     >
                       +
                     </button>

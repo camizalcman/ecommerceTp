@@ -1,7 +1,7 @@
 const Footer = () => {
 
     return (
-        <footer className='bg-primary text-secundary pt-24 pb-12 px-6'>
+        <footer className='bg-primary text-secondary pt-24 pb-12 px-6'>
 
             <div className='max-w-7xl mx-auto flex fflex-row justify-between items-start gap-12'>
 
@@ -10,7 +10,7 @@ const Footer = () => {
                     
                     
 
-                    <h2 className='font-medium text-[1.8em] sm:text-[2em] md:text-[2.5em] font-sora text-white leading-none mt-2'>Pizzeria</h2>
+                    <h2 className='font-medium text-[1.8em] sm:text-[2em] md:text-[2.5em] font-sora leading-none mt-2'>Pizzeria</h2>
 
                 </div>
 
