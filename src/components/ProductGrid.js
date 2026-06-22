@@ -74,13 +74,14 @@ export default function ProductGrid({ products = [] }) {
               ) : null}
 
               {product.sizes?.length ? (
-                <div className="mt-3 flex flex-col gap-1">
-                  {product.sizes.map((size) => (
-                    <p key={size.label} className="text-sm font-semibold text-primary">
-                      {size.label}: ${size.price}
-                    </p>
-                  ))}
-                </div>
+               <div className="mt-3 flex flex-col gap-2"> 
+                {product.sizes.map((size) => (
+                  <div key={size.label} className="flex gap-1 text-base font-normal text-primary justify-between">
+                    <span>{size.label}</span>
+                    <span className="font-semibold">${size.price}</span> 
+                  </div>
+                ))}
+              </div>
               ) : null}
 
             </div>

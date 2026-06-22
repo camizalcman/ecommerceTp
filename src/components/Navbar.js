@@ -10,7 +10,7 @@ const links = [
 ];
 
 export default function Navbar() {
-      const { favoritesQty } = useAppContext()
+      const { favoritesQty, cartQty} = useAppContext()
       
   return (
     <header className="border-b border-slate-200 bg-primary text-secondary sticky top-0 z-50">
@@ -31,7 +31,7 @@ export default function Navbar() {
           ))}
         </div>
         
-        <div className='pt-6 border-t border-white/10'>
+        <div className='flex gap-6'>
             <Link href="/" className='relative'>Favoritos
                 {favoritesQty() > 0 && (
                     <span className="absolute -top-2 -right-6 bg-red-500 text-xs rounded-full w-5 h-5 flex items-center justify-center">
@@ -39,7 +39,17 @@ export default function Navbar() {
                     </span>
                         )}
             </Link>
+
+            <Link href="/cart" className='relative'>Carrito
+                {cartQty() > 0 && (
+                    <span className="absolute -top-2 -right-6 bg-red-500 text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                      {cartQty()}
+                    </span>
+                )}
+            </Link>
         </div>
+
+        
       </nav>
     </header>
   );

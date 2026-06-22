@@ -1,5 +1,6 @@
 "use client";
 import Image from 'next/image';
+import Link from 'next/link'
 import { useState } from "react";
 
 const pizzas = [
@@ -38,17 +39,14 @@ const [animating, setAnimating] = useState(false);
         </h2>
 
         <div className="flex gap-4 mt-8">
-          <button
+          <Link
+            href={`/product/6a378a5d20610ecf6443dfdf`}
             className="bg-primary text-secondary rounded-full px-12 py-3 transition-all duration-300 hover:opacity-90 hover:scale-105"
           >
             Creá tu pizza
-          </button>
+          </Link>
 
-          <button
-            className="border-2 border-primary text-primary rounded-full px-12 py-3 transition-all duration-300 hover:scale-105"
-          >
-            Ver menú
-          </button>
+          <a href="#menu" className="inline-block border-2 border-primary text-primary rounded-full px-12 py-3 transition-all duration-300 hover:scale-105">Ver menú</a>
         </div>
       </div>
 

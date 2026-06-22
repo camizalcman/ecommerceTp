@@ -11,31 +11,47 @@ export const AppContextProvider = ({children}) => {
     const [activeUser, setActiveUser] = useState(null);
 
     //Funciones del carrito
-    //ME FALTA TERMINAR
     const removeFromCart = (cartItemId) => {
         setCart(cart.filter(item => item.cartItemId !== cartItemId))
     }
+   
+    //Recorre el carrito con map. Si encuentra el item con ese cartItemId, le cambia la cantidad y recalcula el subtotal. Si no es ese item, lo deja igual.
+    const updateQuantity = (cartItemId, newQuantity) => {
+        setCart(cart.map(item =>
+            item.cartItemId === cartItemId
+                ? { ...item, quantity: newQuantity, subtotal: item.price * newQuantity }
+                : item
+        ));
+    };
 
     const addToCart = (product, customizations, quantity) => {
-        const cartItemId = `${product._id}-${JSON.stringify(customizations)}`;
-        const exists = cart.find(item => item.cartItemId === cartItemId);
+    const cartItemId = `${product._id}-${JSON.stringify(customizations)}`;
+    const exists = cart.find(item => item.cartItemId === cartItemId);
+    const unitPrice = customizations.size?.price || 0;
 
-        if (exists) {
+    if (exists) {
             updateQuantity(cartItemId, exists.quantity + quantity);
         } else {
             const cartItem = {
                 _id: product._id,
                 name: product.name,
                 image: product.image,
-                price: product.price,
+                price: unitPrice,
                 quantity: quantity,
                 customizations: customizations,
-                subtotal: product.price * quantity,
+                subtotal: unitPrice * quantity,
                 cartItemId: cartItemId,
             };
             setCart([...cart, cartItem]);
         }
     };
+    
+    const clearCart = () => setCart([]);
+
+    const cartTotal = () => cart.reduce((acc, item) => acc + item.subtotal, 0);
+
+    const cartQty = () => cart.reduce((acc, item) => acc + item.quantity, 0);
+
 
     //Funciones de favorites
     const addFavorite = (data) => {
@@ -65,7 +81,9 @@ export const AppContextProvider = ({children}) => {
     return (
         //va a exportar un componente que se llama app context y utiliza el metodo provider
         //value son las cosas que queres dejar publicas y exportar
-        <AppContext.Provider value={{favorites, setFavorites, favoritesQty, addFavorite, removeFavorite, isFavorite, cart, setCart, addToCart, removeFromCart, activeUser, login, logout }}>
+        <AppContext.Provider value={{favorites, setFavorites, favoritesQty, addFavorite, removeFavorite, isFavorite,
+    cart, setCart, addToCart, removeFromCart, updateQuantity, clearCart, cartTotal, cartQty,
+    activeUser, login, logout }}>
             {children}
         </AppContext.Provider>
     )

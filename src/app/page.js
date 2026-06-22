@@ -11,7 +11,7 @@ export default async function Home() {
     <main className="min-h-screen bg-background px-6 py-10 text-slate-900">
       <div className="mx-auto max-w-6xl">
         <Hero/>
-        <section className="mb-8">
+        <section id="menu" className="mb-8">
           <h1 className="mt-4 max-w-3xl text-4xl font-semibold font-sora text-primary">
             Productos
           </h1>
