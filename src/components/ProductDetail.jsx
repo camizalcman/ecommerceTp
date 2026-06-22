@@ -24,6 +24,11 @@ export default function ProductDetail({ product, isCustomizable, options }) {
   };
 
   const handleAddToCart = () => {
+     if (!selectedSize) {
+      alert("Por favor elegí un tamaño antes de agregar al carrito");
+      return;
+    }
+    
     const customizations = isCustomizable
       ? {
           size: selectedSize,

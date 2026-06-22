@@ -3,6 +3,7 @@ import { AppContextProvider } from "@/contexts/AppContext";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CartLateral from "@/components/CartLateral";
 
 import "./globals.css";
 
@@ -37,6 +38,7 @@ export default function RootLayout({ children }) {
           <Navbar />
           {children}
           <Footer />
+          <CartLateral />
         </AppContextProvider>
       </body>
     </html>

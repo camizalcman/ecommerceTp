@@ -25,25 +25,25 @@ export const AppContextProvider = ({children}) => {
     };
 
     const addToCart = (product, customizations, quantity) => {
-    const cartItemId = `${product._id}-${JSON.stringify(customizations)}`;
-    const exists = cart.find(item => item.cartItemId === cartItemId);
-    const unitPrice = customizations.size?.price || 0;
+        const cartItemId = `${product._id}-${JSON.stringify(customizations)}`;
+        const exists = cart.find(item => item.cartItemId === cartItemId);
+        const unitPrice = customizations.size?.price || 0;
 
-    if (exists) {
-            updateQuantity(cartItemId, exists.quantity + quantity);
-        } else {
-            const cartItem = {
-                _id: product._id,
-                name: product.name,
-                image: product.image,
-                price: unitPrice,
-                quantity: quantity,
-                customizations: customizations,
-                subtotal: unitPrice * quantity,
-                cartItemId: cartItemId,
-            };
-            setCart([...cart, cartItem]);
-        }
+        if (exists) {
+                updateQuantity(cartItemId, exists.quantity + quantity);
+            } else {
+                const cartItem = {
+                    _id: product._id,
+                    name: product.name,
+                    image: product.image,
+                    price: unitPrice,
+                    quantity: quantity,
+                    customizations: customizations,
+                    subtotal: unitPrice * quantity,
+                    cartItemId: cartItemId,
+                };
+                setCart([...cart, cartItem]);
+            }
     };
     
     const clearCart = () => setCart([]);
@@ -51,6 +51,11 @@ export const AppContextProvider = ({children}) => {
     const cartTotal = () => cart.reduce((acc, item) => acc + item.subtotal, 0);
 
     const cartQty = () => cart.reduce((acc, item) => acc + item.quantity, 0);
+
+    const [isCartOpen, setIsCartOpen] = useState(false);
+
+    const openCart = () => setIsCartOpen(true);
+    const closeCart = () => setIsCartOpen(false);
 
 
     //Funciones de favorites
@@ -82,7 +87,7 @@ export const AppContextProvider = ({children}) => {
         //va a exportar un componente que se llama app context y utiliza el metodo provider
         //value son las cosas que queres dejar publicas y exportar
         <AppContext.Provider value={{favorites, setFavorites, favoritesQty, addFavorite, removeFavorite, isFavorite,
-    cart, setCart, addToCart, removeFromCart, updateQuantity, clearCart, cartTotal, cartQty,
+    cart, setCart, addToCart, removeFromCart, updateQuantity, clearCart, cartTotal, cartQty, isCartOpen, openCart, closeCart,
     activeUser, login, logout }}>
             {children}
         </AppContext.Provider>
