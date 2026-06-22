@@ -28,7 +28,7 @@ export default function ProductDetail({ product, isCustomizable, options }) {
       alert("Por favor elegí un tamaño antes de agregar al carrito");
       return;
     }
-    
+
     const customizations = isCustomizable
       ? {
           size: selectedSize,
@@ -69,7 +69,7 @@ export default function ProductDetail({ product, isCustomizable, options }) {
 
               {!isCustomizable && (
                 <img
-                  src="/images/products/pizza.png"
+                  src={`/images/products/${product.image}`}
                   alt={product.name}
                   className="absolute inset-0 w-full h-full object-contain"
                 />
