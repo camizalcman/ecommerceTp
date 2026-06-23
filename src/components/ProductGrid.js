@@ -29,16 +29,22 @@ export default function ProductGrid({ products = [] }) {
   const { favorites, setFavorites, favoritesQty, addFavorite, removeFavorite, isFavorite } = useAppContext()
 
   const toggleFavorite = (product) => {
-  if (isFavorite(product.id)) {
-    removeFavorite(product.id)
+  
+  const normalizedProduct = { ...product, id: product._id }
+
+  if (isFavorite(normalizedProduct.id)) {
+    removeFavorite(normalizedProduct.id)
   } else {
-    addFavorite(product)
+    addFavorite(normalizedProduct)
   }
 }
 
-  return (
+  
+return (
     <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {products.map((product) => (
+
+        
         <Link
           key={product._id}
           href={`/product/${product._id}`}
@@ -68,17 +74,14 @@ export default function ProductGrid({ products = [] }) {
                 <h2 className="text-lg font-semibold text-primary font-sora">{product.name}</h2>
                 
                <button
-                  onClick={() => {
-                    if (isFavorite) {
-                      removeFavorite(product.id)
-                    } else {
-                      addFavorite(product)
-                    }
+                  onClick={(e) => {
+                    e.preventDefault()
+                    toggleFavorite(product)
                   }}
                 >
                   <Heart
                     className={`h-5 w-5 text-primary ${
-                      isFavorite ? "fill-primary" : ""
+                      isFavorite(product._id) ? "fill-primary" : ""
                     }`}
                   />
                 </button>
@@ -106,8 +109,8 @@ export default function ProductGrid({ products = [] }) {
               {product.sizes?.length ? (
                <div className="mt-4 flex flex-col gap-2"> 
                 {product.sizes.map((size) => (
-                  <div>
-                    <div key={size.label} className="flex gap-1 text-base font-normal text-primary justify-between">
+                  <div key={size.label}>
+                    <div className="flex gap-1 text-base font-normal text-primary justify-between">
                       <span>{size.label}</span>
                       <span className="font-semibold">${size.price}</span>
                     </div>

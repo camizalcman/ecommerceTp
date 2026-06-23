@@ -1,11 +1,13 @@
 'use client'
 import { useState, useContext, createContext } from "react";
 
+// Creación del contexto global de la aplicación
 const AppContext = createContext(); 
 
-//va a englobar toda la aplicacion
+//va a englobar toda la aplicacion y expone el estado global
 export const AppContextProvider = ({children}) => {
 
+    //Se presentan los estados
     const [cart, setCart] = useState([]);
     const [favorites, setFavorites] = useState([]);
     const [activeUser, setActiveUser] = useState(null);
@@ -24,14 +26,22 @@ export const AppContextProvider = ({children}) => {
         ));
     };
 
+    //Recibe el product, customizaciones y cantidad
     const addToCart = (product, customizations, quantity) => {
+
+        //Se crea un ID compuesto, definido por id de producto mas customizaciones
         const cartItemId = `${product._id}-${JSON.stringify(customizations)}`;
+        //busca si ya existe en el carrito
         const exists = cart.find(item => item.cartItemId === cartItemId);
+        //Toma el precio según el tamaño elegido, si no existe es 0
         const unitPrice = customizations.size?.price || 0;
 
+        
         if (exists) {
+                //Si ya existe el producto, en vez de duplicarlo suma cantidad
                 updateQuantity(cartItemId, exists.quantity + quantity);
             } else {
+                //Si ya existe el producto, crea un nuevo item en el carrito
                 const cartItem = {
                     _id: product._id,
                     name: product.name,

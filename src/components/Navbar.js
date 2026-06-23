@@ -32,12 +32,12 @@ export default function Navbar() {
           ))}
         </div>
         
-        <div className='flex gap-6'>
+        <div className='flex gap-12'>
             <Link href="/favorites" className='relative flex gap-1 justify-center items-center'>
                 <Heart className="h-5 w-5" strokeWidth={1.5} />
                 Favoritos
                 {favoritesQty() > 0 && (
-                    <span className="absolute -top-2 -right-6 bg-red-500 text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    <span className="absolute -top-2 -right-6 bg-secondary text-xs text-primary rounded-full w-5 h-5 flex items-center justify-center">
                       {favoritesQty()}
                     </span>
                         )}
