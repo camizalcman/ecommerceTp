@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link'
 import { useState } from "react";
+import { MoveRight } from "lucide-react";
 
 const pizzas = [
   { src: "/images/products/pizza.png", alt: "Pizza" },
@@ -57,7 +58,7 @@ const [animating, setAnimating] = useState(false);
           onClick={handleNext}
           className="text-primary hover:text-primary-hover transition-colors text-3xl"
         >
-          →
+          <MoveRight className="w-6 h-6 text-primary" />
         </button>
 
         <div className="relative w-[550px] h-[550px]">

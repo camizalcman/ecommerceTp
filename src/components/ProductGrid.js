@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Heart } from 'lucide-react';
 
 function getProductImageSrc(image) {
   if (!image) {
@@ -50,9 +51,11 @@ export default function ProductGrid({ products = [] }) {
 
             <div className="mt-4">
 
-              <h2 className="text-xl font-semibold text-primary font-sora">
-                {product.name}
-              </h2>
+              <div className="flex justify-between">
+                <h2 className="text-lg font-semibold text-primary font-sora">{product.name}</h2>
+                
+                <Heart className="h-5 w-5 text-primary" strokeWidth={1.5} />
+              </div>
 
               <p className="mt-1 line-clamp-2 text-sm text-slate-600">
                 {product.description || "Sin descripcion"}
@@ -74,12 +77,16 @@ export default function ProductGrid({ products = [] }) {
               ) : null}
 
               {product.sizes?.length ? (
-               <div className="mt-3 flex flex-col gap-2"> 
+               <div className="mt-4 flex flex-col gap-2"> 
                 {product.sizes.map((size) => (
-                  <div key={size.label} className="flex gap-1 text-base font-normal text-primary justify-between">
-                    <span>{size.label}</span>
-                    <span className="font-semibold">${size.price}</span> 
+                  <div>
+                    <div key={size.label} className="flex gap-1 text-base font-normal text-primary justify-between">
+                      <span>{size.label}</span>
+                      <span className="font-semibold">${size.price}</span>
+                    </div>
+                    <hr className="border-t border-gray-300 my-1 w-full" />
                   </div>
+                  
                 ))}
               </div>
               ) : null}

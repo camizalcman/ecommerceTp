@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 const Footer = () => {
 
     return (
@@ -6,11 +8,17 @@ const Footer = () => {
             <div className='max-w-7xl mx-auto flex fflex-row justify-between items-start gap-12'>
 
                 
-                <div className='flex flex-col items-center'>
+                <div className='flex flex-col ml-12'>
                     
                     
 
-                    <h2 className='font-medium text-[1.8em] sm:text-[2em] md:text-[2.5em] font-sora leading-none mt-2'>Pizzeria</h2>
+                    <h2 className='font-medium text-[1.8em] sm:text-[2em] md:text-[2.5em] font-sora leading-none mt-2'>Crusta</h2>
+                    <Image className="mt-6"
+                        src="/images/mascota.png"
+                        alt="Mascota de la marca"
+                        width={250}
+                        height={250}
+                        />
 
                 </div>
 
