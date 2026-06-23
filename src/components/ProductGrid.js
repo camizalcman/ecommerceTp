@@ -1,6 +1,8 @@
+'use client'
 import Image from "next/image";
 import Link from "next/link";
 import { Heart } from 'lucide-react';
+import { useAppContext } from '@/contexts/AppContext'
 
 function getProductImageSrc(image) {
   if (!image) {
@@ -22,6 +24,17 @@ export default function ProductGrid({ products = [] }) {
       </p>
     );
   }
+
+  //terminar de armar esto
+  const { favorites, setFavorites, favoritesQty, addFavorite, removeFavorite, isFavorite } = useAppContext()
+
+  const toggleFavorite = (product) => {
+  if (isFavorite(product.id)) {
+    removeFavorite(product.id)
+  } else {
+    addFavorite(product)
+  }
+}
 
   return (
     <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -54,7 +67,21 @@ export default function ProductGrid({ products = [] }) {
               <div className="flex justify-between">
                 <h2 className="text-lg font-semibold text-primary font-sora">{product.name}</h2>
                 
-                <Heart className="h-5 w-5 text-primary" strokeWidth={1.5} />
+               <button
+                  onClick={() => {
+                    if (isFavorite) {
+                      removeFavorite(product.id)
+                    } else {
+                      addFavorite(product)
+                    }
+                  }}
+                >
+                  <Heart
+                    className={`h-5 w-5 text-primary ${
+                      isFavorite ? "fill-primary" : ""
+                    }`}
+                  />
+                </button>
               </div>
 
               <p className="mt-1 line-clamp-2 text-sm text-slate-600">
