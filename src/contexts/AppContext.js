@@ -58,25 +58,31 @@ export const AppContextProvider = ({children}) => {
     
     const clearCart = () => setCart([]);
 
+    //reduce recorre el array y va acumulando los subtotales.
     const cartTotal = () => cart.reduce((acc, item) => acc + item.subtotal, 0);
 
+    //reduce recorre el array y va acumulando las cantidades.
     const cartQty = () => cart.reduce((acc, item) => acc + item.quantity, 0);
 
+    //para abrir y cerrar el carrito
     const [isCartOpen, setIsCartOpen] = useState(false);
-
     const openCart = () => setIsCartOpen(true);
     const closeCart = () => setIsCartOpen(false);
 
 
     //Funciones de favorites
+
+    //agrega un producto a favoritos. (...favoritos copia lo que ya tenía)
     const addFavorite = (data) => {
         setFavorites([...favorites, data])
     }
 
+    //para eliminar, se queda con los que no coinciden con el producto indicado
     const removeFavorite = (productId) => {
         setFavorites(favorites.filter(fav => fav._id !== productId))
     }
 
+    //verifica si el producto está en favoritos, .some devuelve true o false
     const isFavorite = (productId) => {
         return favorites.some(fav => fav._id === productId)
     }
@@ -84,8 +90,10 @@ export const AppContextProvider = ({children}) => {
     const favoritesQty = () => favorites.length
 
     //Funciones de user
+    //guarda el usuario logueado
     const login = (userData) => setActiveUser(userData)
 
+    //cierra la sesión y limpia los favoritos
     const logout = () => {
         setActiveUser(null)
         setFavorites([])
