@@ -28,14 +28,11 @@ export default function ProductGrid({ products = [] }) {
   //terminar de armar esto
   const { favorites, setFavorites, favoritesQty, addFavorite, removeFavorite, isFavorite } = useAppContext()
 
-  const toggleFavorite = (product) => {
-  
-  const normalizedProduct = { ...product, id: product._id }
-
-  if (isFavorite(normalizedProduct.id)) {
-    removeFavorite(normalizedProduct.id)
+const toggleFavorite = (product) => {
+  if (isFavorite(product._id)) {
+    removeFavorite(product._id)
   } else {
-    addFavorite(normalizedProduct)
+    addFavorite(product)
   }
 }
 
