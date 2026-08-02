@@ -22,18 +22,16 @@ export default async function ProductPage({ params }) {
 
   let options = {};
 
- if (isCustomizable) {
-    // personalizable: trae todo
-    const [sizes, doughs, mozzarellas, sauces, toppings] = await Promise.all([
+  if (isCustomizable) {
+    const [sizes, doughs, sauces, mozzarellas, toppings] = await Promise.all([
       getSizes(),
       getDoughs(),
       getSauces(),
       getMozzarellas(),
       getToppings(),
     ]);
-    options = { sizes, doughs, mozzarellas, sauces, toppings };
+    options = { sizes, doughs, sauces, mozzarellas, toppings };
   } else {
-    // no personalizable: solo tamaño, masa y mozzarella
     const [sizes, doughs, mozzarellas] = await Promise.all([
       getSizes(),
       getDoughs(),

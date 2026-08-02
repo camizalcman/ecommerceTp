@@ -67,46 +67,49 @@ export default function ProductDetail({ product, isCustomizable, options }) {
           <div className="lg:sticky lg:top-24 flex justify-center items-center">
             <div className="relative w-[600px] h-[600px] aspect-square">
 
-              {!isCustomizable && (
-                <img
-                  src={`/images/products/${product.image}`}
-                  alt={product.name}
-                  className="absolute inset-0 w-full h-full object-contain"
-                />
-              )}
+               {/* NO personalizable → imagen fija siempre */}
+                {!isCustomizable && (
+                  <img
+                    src={`/images/products/${product.image}`}
+                    alt={product.name}
+                    className="absolute inset-0 w-full h-full object-contain"
+                  />
+                )}
 
-              {isCustomizable && doughToShow && (
-                <img
-                  src={`/images/doughs/${doughToShow.image}`}
-                  alt={doughToShow.name}
-                  className="absolute inset-0 w-full h-full object-contain"
-                />
+              {/* Personalizable → capas dinámicas */}
+              {isCustomizable && (
+                <>
+                  {doughToShow && (
+                    <img
+                      src={`/images/doughs/${doughToShow.image}`}
+                      alt={doughToShow.name}
+                      className="absolute inset-0 w-full h-full object-contain"
+                    />
+                  )}
+                  {selectedSauce && (
+                    <img
+                      src={`/images/sauces/${selectedSauce.image}`}
+                      alt={selectedSauce.name}
+                      className="absolute inset-0 w-full h-full object-contain"
+                    />
+                  )}
+                  {selectedMozzarella && (
+                    <img
+                      src={`/images/mozzarellas/${selectedMozzarella.image}`}
+                      alt={selectedMozzarella.name}
+                      className="absolute inset-0 w-full h-full object-contain"
+                    />
+                  )}
+                  {selectedToppings.map((topping) => (
+                    <img
+                      key={topping._id}
+                      src={`/images/toppings/${topping.image}`}
+                      alt={topping.name}
+                      className="absolute inset-0 w-full h-full object-contain"
+                    />
+                  ))}
+                </>
               )}
-
-              {isCustomizable && selectedSauce && (
-                <img
-                  src={`/images/sauces/${selectedSauce.image}`}
-                  alt={selectedSauce.name}
-                  className="absolute inset-0 w-full h-full object-contain"
-                />
-              )}
-
-              {isCustomizable && selectedMozzarella && (
-                <img
-                  src={`/images/mozzarellas/${selectedMozzarella.image}`}
-                  alt={selectedMozzarella.name}
-                  className="absolute inset-0 w-full h-full object-contain"
-                />
-              )}
-
-              {isCustomizable && selectedToppings.map((topping) => (
-                <img
-                  key={topping._id}
-                  src={`/images/toppings/${topping.image}`}
-                  alt={topping.name}
-                  className="absolute inset-0 w-full h-full object-contain"
-                />
-              ))}
 
             </div>
           </div>
