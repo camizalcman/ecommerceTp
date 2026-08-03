@@ -1,24 +1,19 @@
 import Link from "next/link";
 import { getOrders } from "@/lib/orders";
 import { getUsers } from "@/lib/users";
-import { getProducts } from "@/lib/products";
+import { ArrowRight } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
-  const [orders, users, products] = await Promise.all([
+  const [orders, users] = await Promise.all([
     getOrders(),
     getUsers(),
-    getProducts(),
   ]);
 
-  // Últimas 5 órdenes
   const lastOrders = orders.slice(0, 5);
-
-  // Últimos 5 usuarios
   const lastUsers = users.slice(0, 5);
 
-  // Total vendido en el mes actual
   const now = new Date();
   const totalThisMonth = orders
     .filter((order) => {
@@ -30,66 +25,84 @@ export default async function DashboardPage() {
     })
     .reduce((acc, order) => acc + order.total, 0);
 
-  // Productos con stock bajo (stock 0 o 1) — por ahora vacío porque no tenemos stock
-  const lowStockProducts = [];
-
   return (
-    <main className="min-h-screen bg-slate-100 px-6 py-10 text-slate-900">
-      <div className="mx-auto max-w-6xl space-y-8">
+    <main className="min-h-screen bg-background px-6 py-10 text-slate-900">
+      <div className="mx-auto max-w-6xl space-y-6">
 
         <div>
-          <h1 className="text-3xl font-semibold">Dashboard</h1>
+          <h1 className="text-3xl font-semibold font-sora text-primary">Dashboard</h1>
           <p className="mt-1 text-slate-500">Resumen administrativo del ecommerce.</p>
         </div>
 
-        {/* Links rápidos */}
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+        {/* Links rápidos con foto */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-10">
           <Link
             href="/dashboard/products"
-            className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition text-center"
+            className="relative overflow-hidden rounded-xl h-36 flex items-end group text-secondary"
           >
-            <p className="text-2xl">🍕</p>
-            <p className="mt-2 font-semibold text-slate-900">Productos</p>
-            <p className="text-sm text-slate-500">Crear y editar productos</p>
+            <img
+              src="/images/dashProductos.jpg"
+              alt="Productos"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-primary/60" />
+            <div className="relative z-10 p-6 flex items-center justify-between w-full">
+              <div className="text-secondary">
+                <h2 className="font-sora text-3xl font-semibold">Productos y categorías</h2>
+                <p className="text-sm">Crear y editar productos y categorías</p>
+              </div>
+              <ArrowRight className="text-secondary w-6 h-6" />
+            </div>
           </Link>
+
           <Link
             href="/dashboard/orders"
-            className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition text-center"
+            className="relative overflow-hidden rounded-xl h-36 flex items-end group"
           >
-            <p className="text-2xl">📦</p>
-            <p className="mt-2 font-semibold text-slate-900">Órdenes</p>
-            <p className="text-sm text-slate-500">Ver y gestionar pedidos</p>
+            <img
+              src="/images/dashOrdenes.jpg"
+              alt="Órdenes"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-primary/60" />
+            <div className="relative z-10 p-6 flex items-center justify-between w-full">
+              <div className="text-secondary">
+                <h2 className="font-sora text-3xl font-semibold">Órdenes</h2>
+                <p className="text-sm">Ver y gestionar pedidos</p>
+              </div>
+              <ArrowRight className="text-secondary w-6 h-6" />
+            </div>
           </Link>
         </div>
 
         {/* Métricas */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <div className="bg-white rounded-2xl p-6 shadow-sm">
-            <p className="text-sm text-slate-500">Total vendido este mes</p>
-            <p className="mt-2 text-3xl font-bold text-primary">${totalThisMonth}</p>
+          <div className="bg-primary rounded-xl p-6 shadow-sm">
+            <p className="text-sm text-secondary/80">Total vendido este mes</p>
+            <p className="mt-2 text-3xl font-bold text-secondary font-sora">${totalThisMonth}</p>
           </div>
-          <div className="bg-white rounded-2xl p-6 shadow-sm">
+          <div className="border border-primary rounded-xl p-6 shadow-sm">
             <p className="text-sm text-slate-500">Órdenes totales</p>
-            <p className="mt-2 text-3xl font-bold text-primary">{orders.length}</p>
+            <p className="mt-2 text-3xl font-bold text-primary font-sora">{orders.length}</p>
           </div>
-          <div className="bg-white rounded-2xl p-6 shadow-sm">
+          <div className="border border-primary rounded-xl p-6 shadow-sm">
             <p className="text-sm text-slate-500">Usuarios registrados</p>
-            <p className="mt-2 text-3xl font-bold text-primary">{users.length}</p>
+            <p className="mt-2 text-3xl font-bold text-primary font-sora">{users.length}</p>
           </div>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-2">
 
           {/* Últimas 5 órdenes */}
-          <div className="bg-white rounded-2xl p-6 shadow-sm">
+          <div className="bg-primary/70 rounded-xl p-6 shadow-sm">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="font-semibold text-slate-900">Últimas órdenes</h2>
-              <Link href="/dashboard/orders" className="text-sm text-primary hover:underline">
+              <h2 className="font-semibold text-secondary font-sora text-lg">Últimas órdenes</h2>
+              <Link href="/dashboard/orders" className="text-sm text-secondary">
                 Ver todas
               </Link>
             </div>
             {lastOrders.length === 0 ? (
-              <p className="text-slate-500 text-sm">No hay órdenes todavía.</p>
+              <p className="text-secondary text-sm">No hay órdenes todavía.</p>
             ) : (
               <div className="space-y-3">
                 {lastOrders.map((order) => (
@@ -122,20 +135,20 @@ export default async function DashboardPage() {
           </div>
 
           {/* Últimos 5 usuarios */}
-          <div className="bg-white rounded-2xl p-6 shadow-sm">
-            <h2 className="font-semibold text-slate-900 mb-4">Últimos usuarios</h2>
+          <div className="bg-primary/70 rounded-xl p-6 shadow-sm">
+            <h2 className="font-semibold text-secondary mb-4 font-sora text-lg">Últimos usuarios</h2>
             {lastUsers.length === 0 ? (
-              <p className="text-slate-500 text-sm">No hay usuarios todavía.</p>
+              <p className="text-secondary text-sm">No hay usuarios todavía.</p>
             ) : (
               <div className="space-y-3">
                 {lastUsers.map((user) => (
                   <div key={user._id} className="flex items-center gap-3 p-2">
-                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold text-sm">
+                    <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-primary font-semibold text-sm">
                       {user.name?.charAt(0).toUpperCase()}
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-slate-900">{user.name}</p>
-                      <p className="text-xs text-slate-500">{user.email}</p>
+                      <p className="text-sm font-medium text-secondary">{user.name}</p>
+                      <p className="text-xs text-secondary">{user.email}</p>
                     </div>
                   </div>
                 ))}
