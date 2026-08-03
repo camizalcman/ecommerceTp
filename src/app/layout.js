@@ -23,8 +23,8 @@ const sora = Sora({
 });
 
 export const metadata = {
-  title: "CRUD de Productos",
-  description: "Ejemplo simple de ecommerce con Next.js y MongoDB",
+  title: "Crusta",
+  description: "Pizzas hechas a tu gusto",
 };
 
 export default function RootLayout({ children }) {

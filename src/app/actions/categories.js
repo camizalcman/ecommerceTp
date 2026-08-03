@@ -17,6 +17,7 @@ function getCategoryPayload(formData) {
 function revalidateCategoryViews() {
   revalidatePath("/");
   revalidatePath("/dashboard");
+  revalidatePath("/dashboard/products"); 
 }
 
 export async function createCategory(_previousState, formData) {

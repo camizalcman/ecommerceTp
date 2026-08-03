@@ -36,29 +36,28 @@ const [animating, setAnimating] = useState(false);
     
     <div className="w-full lg:w-1/2 flex flex-col justify-center text-left">
       <h1 className="font-sora font-bold text-primary text-4xl sm:text-4xl md:text-5xl">
-        Pizzas que se
-        <br />
-        hacen a tu manera.
+        Hechas a tu gusto
+
       </h1>
 
-      <h2 className="font-sora font-semibold text-primary text-lg sm:text-xl md:text-2xl mt-4">
-        Elegí tu pizza favorita o armá la tuya desde cero
+      <h2 className="font-sora font-semibold text-primary text-lg sm:text-xl md:text-2xl mt-6">
+        Elegí tus ingredientes para armar una pizza única, preparada especialmente para vos.
       </h2>
 
-      <div className="flex flex-col sm:flex-row gap-4 mt-8 justify-center lg:justify-start">
-        <Link
-          href={`/product/6a378a5d20610ecf6443dfdf`}
-          className="bg-primary text-secondary rounded-full px-8 md:px-12 py-3 transition-all duration-300 hover:opacity-90 hover:scale-105"
-        >
-          Creá tu pizza
-        </Link>
-
+      <div className="flex flex-col sm:flex-row gap-4 mt-12 justify-center lg:justify-start">
         <a
           href="#menu"
-          className="inline-block border-2 border-primary text-primary rounded-full px-8 md:px-12 py-3 transition-all duration-300 hover:scale-105"
+          className="bg-primary text-secondary rounded-full px-8 md:px-12 py-3 transition-all duration-300 hover:opacity-90 hover:scale-105"
         >
           Ver menú
         </a>
+
+        <Link
+          href={`/product/6a378a5d20610ecf6443dfdf`}
+          className="inline-block border-2 border-primary text-primary rounded-full px-8 md:px-12 py-3 transition-all duration-300 hover:scale-105"
+        >
+          Creá tu pizza
+        </Link>
       </div>
     </div>
 

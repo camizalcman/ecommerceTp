@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useAppContext } from "@/contexts/AppContext";
+import { Heart } from "lucide-react";
 
 export default function ProductDetail({ product, isCustomizable, options }) {
   const { addToCart } = useAppContext();
@@ -57,6 +58,16 @@ export default function ProductDetail({ product, isCustomizable, options }) {
   // si el usuario eligió una masa, usás esa
   // si no eligió ninguna, se muestra la "Común" por defecto (sin necesidad de seleccionarla)
   const doughToShow = selectedDough || options.doughs?.find(d => d.name === "Común");
+
+  const { addFavorite, removeFavorite, isFavorite } = useAppContext();
+
+  const toggleFavorite = () => {
+    if (isFavorite(product._id)) {
+      removeFavorite(product._id);
+    } else {
+      addFavorite(product);
+    }
+  };
 
   return (
     <div className="max-w-7xl mx-auto p-6">
@@ -118,7 +129,16 @@ export default function ProductDetail({ product, isCustomizable, options }) {
         {/* Contenido con línea de progreso */}
         <div className="w-full lg:w-1/2 relative">
 
-          <h1 className="text-3xl font-bold mt-10 text-primary font-sora">{product.name}</h1>
+          <div className="flex items-center justify-between mt-10">
+            <h1 className="text-3xl font-bold text-primary font-sora">{product.name}</h1>
+            <button onClick={toggleFavorite}>
+              <Heart
+                className={`h-6 w-6 text-primary ${
+                  isFavorite(product._id) ? "fill-primary" : ""
+                }`}
+              />
+            </button>
+          </div>
           <p className="mt-2 text-gray-600">{product.description}</p>
 
           <div className="relative mt-10 pl-8">

@@ -91,7 +91,38 @@ export const AppContextProvider = ({children}) => {
 
     //Funciones de user
     //guarda el usuario logueado
-    const login = (userData) => setActiveUser(userData)
+    const login = async (userData) => {
+        setActiveUser(userData);
+
+        try {
+            // 1. Traer favoritos persistidos de la DB
+            const res = await fetch(`/api/users/${userData._id}/favorites`);
+            const data = await res.json();
+            const persistedFavorites = data.favorites || [];
+
+            // 2. Combinar con favoritos temporales evitando duplicados
+            const persistedIds = persistedFavorites.map(f => f._id);
+            const temporaryFavorites = favorites.filter(f => !persistedIds.includes(f._id));
+            const combined = [...persistedFavorites, ...temporaryFavorites];
+
+            // 3. Sincronizar los temporales con MongoDB si los hay
+            if (temporaryFavorites.length > 0) {
+                await fetch(`/api/users/${userData._id}/favorites`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        productIds: temporaryFavorites.map(f => f._id)
+                    }),
+                });
+            }
+
+            // 4. Actualizar el context con todos los favoritos
+            setFavorites(combined);
+
+        } catch (error) {
+            console.error("Error sincronizando favoritos:", error);
+        }
+    };
 
     //cierra la sesión y limpia los favoritos
     const logout = () => {

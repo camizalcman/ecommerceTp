@@ -15,9 +15,7 @@ export function serializeCategory(category) {
 
 export async function getCategories() {
   await connectDB();
-
-  const categories = await Category.find().sort({ name: 1 }).lean();
-
+  const categories = await Category.find().sort({ createdAt: -1 }).lean();
   return categories.map(serializeCategory);
 }
 

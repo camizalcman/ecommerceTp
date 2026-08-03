@@ -15,10 +15,6 @@ export default async function Home() {
           <h1 className="mt-4 max-w-3xl text-4xl font-semibold font-sora text-primary">
             Productos
           </h1>
-          {/*<p className="mt-4 max-w-2xl text-base text-slate-600">
-            Catalogo publico del ecommerce. La administracion queda disponible
-            en /dashboard.
-          </p>*/}
           
         </section>
 
