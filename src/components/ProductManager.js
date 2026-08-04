@@ -133,10 +133,10 @@ export default function ProductManager({
     refreshProducts();
   }
 
-  return (
+return (
     <div className="grid gap-8 lg:grid-cols-[360px_1fr]">
-      <section className="rounded-lg border border-black/10 bg-white p-6 shadow-sm">
-        <h2 className="text-2xl font-semibold text-slate-900">
+      <section className="rounded-lg border-2 border-primary bg-primary/15 p-6 shadow-sm">
+        <h2 className="text-2xl font-semibold text-primary font-sora">
           {editingId ? "Editar producto" : "Nuevo producto"}
         </h2>
         <p className="mt-2 text-sm text-slate-600">
@@ -145,7 +145,7 @@ export default function ProductManager({
 
         <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
           <input
-            className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none"
+            className="w-full rounded-lg border border-primary/60 bg-background px-4 py-3 outline-none"
             name="name"
             placeholder="Nombre"
             value={form.name}
@@ -153,22 +153,22 @@ export default function ProductManager({
             required
           />
           <textarea
-            className="min-h-28 w-full rounded-lg border border-slate-300 px-4 py-3 outline-none"
+            className="min-h-28 w-full rounded-lg border border-primary/60 bg-background px-4 py-3 outline-none"
             name="description"
             placeholder="Descripcion"
             value={form.description}
             onChange={handleChange}
           />
           <input
-            className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none"
+            className="w-full rounded-lg border border-primary/60 bg-background px-4 py-3 outline-none"
             name="image"
             placeholder="Nombre de imagen, ej: pizza.png"
             value={form.image}
             onChange={handleChange}
           />
 
-          <fieldset className="rounded-lg border border-slate-300 px-4 py-3">
-            <legend className="px-1 text-sm font-medium text-slate-700">
+          <fieldset className="rounded-lg border border-primary/60 bg-background px-4 py-3">
+            <legend className="px-1 text-sm font-medium text-primary">
               Tamaños y precios
             </legend>
             <div className="grid gap-3">
@@ -178,7 +178,7 @@ export default function ProductManager({
                   <div className="relative flex-1">
                     <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">$</span>
                     <input
-                      className="w-full rounded-lg border border-slate-300 pl-7 pr-3 py-2 outline-none"
+                      className="w-full rounded-lg border border-primary/60 bg-background pl-7 pr-3 py-2 outline-none"
                       type="number"
                       min="0"
                       placeholder="0"
@@ -192,11 +192,10 @@ export default function ProductManager({
             </div>
           </fieldset>
 
-          <fieldset className="rounded-lg border border-slate-300 px-4 py-3">
-            <legend className="px-1 text-sm font-medium text-slate-700">
+          <fieldset className="rounded-lg border border-primary/60 bg-background px-4 py-3">
+            <legend className="px-1 text-sm font-medium text-primary">
               Categorias
             </legend>
-
             {initialCategories.length === 0 ? (
               <p className="py-2 text-sm text-slate-500">
                 Crea una categoria antes de asociarla a productos.
@@ -206,7 +205,7 @@ export default function ProductManager({
                 {initialCategories.map((category) => (
                   <label
                     key={category._id}
-                    className="flex cursor-pointer items-start gap-3 rounded-lg border border-slate-200 px-3 py-2 hover:bg-slate-50"
+                    className="flex cursor-pointer items-start gap-3 rounded-lg border border-primary/60 px-3 py-2 hover:bg-primary/10"
                   >
                     <input
                       checked={form.categories.includes(category._id)}
@@ -234,14 +233,14 @@ export default function ProductManager({
 
           <div className="flex gap-3">
             <button
-              className="rounded-lg bg-slate-900 px-4 py-3 text-sm font-semibold text-white"
+              className="rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-secondary"
               disabled={isSaving}
               type="submit"
             >
               {isSaving ? "Guardando..." : editingId ? "Actualizar" : "Crear"}
             </button>
             <button
-              className="rounded-lg border border-slate-300 px-4 py-3 text-sm font-semibold text-slate-700"
+              className="rounded-lg border border-primary px-4 py-3 text-sm font-semibold text-primary"
               type="button"
               onClick={resetForm}
             >
@@ -250,19 +249,20 @@ export default function ProductManager({
           </div>
         </form>
 
-        {message ? <p className="mt-4 text-sm text-slate-700">{message}</p> : null}
+        {message ? <p className="mt-4 text-sm text-primary">{message}</p> : null}
       </section>
 
-      <section className="rounded-lg border border-black/10 bg-white p-6 shadow-sm">
+      {/* Lista de productos */}
+      <section className="rounded-lg border-2 border-primary bg-background p-6 shadow-sm">
         <div className="flex items-center justify-between gap-4">
           <div>
-            <h2 className="text-2xl font-semibold text-slate-900">Productos</h2>
+            <h2 className="text-2xl font-semibold text-primary font-sora">Productos</h2>
             <p className="mt-2 text-sm text-slate-600">
               Lista obtenida desde el container del dashboard.
             </p>
           </div>
           <button
-            className="rounded-lg border border-slate-300 px-4 py-3 text-sm font-semibold text-slate-700"
+            className="rounded-lg border border-primary px-4 py-3 text-sm font-semibold text-primary hover:bg-primary hover:text-secondary transition"
             disabled={isRefreshing}
             type="button"
             onClick={refreshProducts}
@@ -278,10 +278,10 @@ export default function ProductManager({
             {initialProducts.map((product) => (
               <article
                 key={product._id}
-                className="rounded-lg border border-slate-200 p-5"
+                className="rounded-lg border border-primary/30 p-5 hover:border-primary transition"
               >
                 <div className="flex items-start justify-between gap-4">
-                  <h3 className="text-xl font-semibold text-slate-900">{product.name}</h3>
+                  <h3 className="text-xl font-semibold text-primary font-sora">{product.name}</h3>
                   <div className="text-right text-sm text-slate-700">
                     {product.sizes?.map((s) => (
                       <p key={s.label}>{s.label}: ${s.price}</p>
@@ -293,7 +293,7 @@ export default function ProductManager({
                   {product.description || "Sin descripcion"}
                 </p>
 
-                <p className="mt-3 break-all text-xs text-slate-500">
+                <p className="mt-3 break-all text-xs text-slate-400">
                   ID: {product._id}
                 </p>
 
@@ -302,7 +302,7 @@ export default function ProductManager({
                     {product.categories.map((category) => (
                       <span
                         key={typeof category === "string" ? category : category._id}
-                        className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-800"
+                        className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary"
                       >
                         {typeof category === "string" ? category : category.name}
                       </span>
@@ -312,14 +312,14 @@ export default function ProductManager({
 
                 <div className="mt-4 flex gap-3">
                   <button
-                    className="rounded-lg bg-amber-100 px-4 py-2 text-sm font-semibold text-amber-900"
+                    className="rounded-lg border border-primary px-4 py-2 text-sm font-semibold text-primary hover:bg-primary hover:text-secondary transition"
                     type="button"
                     onClick={() => handleEdit(product)}
                   >
                     Editar
                   </button>
                   <button
-                    className="rounded-lg bg-red-100 px-4 py-2 text-sm font-semibold text-red-900"
+                    className="rounded-lg bg-red-100 px-4 py-2 text-sm font-semibold text-red-900 hover:bg-red-200 transition"
                     type="button"
                     onClick={() => handleDelete(product._id)}
                   >
