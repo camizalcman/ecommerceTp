@@ -109,7 +109,7 @@ export default async function DashboardPage() {
                   <Link
                     key={order._id}
                     href={`/dashboard/order/${order._id}`}
-                    className="flex items-center justify-between hover:bg-slate-50 rounded-lg p-2 transition"
+                    className="flex items-center justify-between bg-background border border-primary rounded-lg p-3 transition"
                   >
                     <div>
                       <p className="text-sm font-medium text-slate-900">#{order.orderNumber}</p>
@@ -118,7 +118,7 @@ export default async function DashboardPage() {
                     <div className="text-right">
                       <p className="text-sm font-semibold text-primary">${order.total}</p>
                       <span className={`text-xs px-2 py-0.5 rounded-full ${
-                        order.status === "active" ? "bg-yellow-100 text-yellow-800" :
+                        order.status === "active" ? "bg-orange-300 text-black-600" :
                         order.status === "shipped" ? "bg-blue-100 text-blue-800" :
                         order.status === "closed" ? "bg-green-100 text-green-800" :
                         "bg-red-100 text-red-800"

@@ -35,33 +35,33 @@ export default function DashboardOrderPage({ params }) {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-slate-100 flex items-center justify-center">
+      <main className="min-h-screen bg-background flex items-center justify-center">
         <p className="text-slate-500">Cargando...</p>
       </main>
     );
   }
 
   return (
-    <main className="min-h-screen bg-slate-100 px-6 py-10">
+    <main className="min-h-screen bg-background px-6 py-10">
       <div className="mx-auto max-w-3xl">
 
-        <Link href="/dashboard/orders" className="text-sm text-primary hover:underline">
-          ← Volver a órdenes
+        <Link href="/dashboard/orders" className="text-sm text-primary ">
+          Volver a órdenes
         </Link>
 
         {/* Encabezado */}
-        <div className="mt-6 bg-white rounded-2xl p-6 shadow-sm">
+        <div className="mt-6 bg-primary/70 rounded-2xl p-6 shadow-sm">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-slate-900">Orden #{order.orderNumber}</h1>
-              <p className="text-sm text-slate-500 mt-1">
+              <h1 className="text-2xl font-bold text-secondary font-sora">Orden #{order.orderNumber}</h1>
+              <p className="text-sm text-secondary mt-1">
                 {new Date(order.createdAt).toLocaleDateString("es-AR", {
                   day: "numeric", month: "long", year: "numeric"
                 })}
               </p>
             </div>
-            <span className={`text-xs px-3 py-1 rounded-full font-medium ${
-              order.status === "active" ? "bg-yellow-100 text-yellow-800" :
+            <span className={`text-sm px-3 py-1 rounded-full font-medium ${
+              order.status === "active" ? "bg-orange-300 text-black-600":
               order.status === "shipped" ? "bg-blue-100 text-blue-800" :
               order.status === "closed" ? "bg-green-100 text-green-800" :
               "bg-red-100 text-red-800"
@@ -74,17 +74,17 @@ export default function DashboardOrderPage({ params }) {
 
           {/* Cambiar estado */}
           <div className="mt-6">
-            <p className="text-sm font-medium text-slate-700 mb-2">Cambiar estado:</p>
-            <div className="flex gap-2 flex-wrap">
+            <p className="text-sm font-medium text-secondary mb-2">Cambiar estado:</p>
+            <div className="flex gap-2 flex-wrap text-secondary">
               {["active", "shipped", "closed", "canceled"].map((status) => (
                 <button
                   key={status}
                   onClick={() => handleStatusChange(status)}
                   disabled={updating || order.status === status}
-                  className={`px-4 py-2 text-sm rounded-full border transition ${
+                  className={`px-3 py-1 text-sm rounded-full border transition ${
                     order.status === status
-                      ? "bg-primary text-secondary border-primary"
-                      : "border-slate-300 hover:border-primary hover:text-primary"
+                      ? "bg-secondary text-primary border-primary border-2"
+                      : "border-secondary"
                   }`}
                 >
                   {status === "active" ? "Activa" :
@@ -97,8 +97,8 @@ export default function DashboardOrderPage({ params }) {
         </div>
 
         {/* Datos usuario */}
-        <div className="mt-4 bg-white rounded-2xl p-6 shadow-sm">
-          <h2 className="font-semibold text-slate-900 mb-3">Datos del cliente</h2>
+        <div className="mt-4 bg-secondary border border-primary rounded-2xl p-6 shadow-sm">
+          <h2 className="font-semibold text-primary font-sora mb-3 text-lg">Datos del cliente</h2>
           <div className="space-y-1 text-sm text-slate-600">
             <p><span className="font-medium">Nombre:</span> {order.contactInfo?.name}</p>
             <p><span className="font-medium">Email:</span> {order.contactInfo?.email}</p>
@@ -111,8 +111,8 @@ export default function DashboardOrderPage({ params }) {
         </div>
 
         {/* Productos */}
-        <div className="mt-4 bg-white rounded-2xl p-6 shadow-sm">
-          <h2 className="font-semibold text-slate-900 mb-4">Productos</h2>
+        <div className="mt-4 bg-primary/15 border border-primary rounded-2xl p-6 shadow-sm">
+          <h2 className="font-semibold text-primary font-sora mb-4 text-lg">Productos</h2>
           <div className="space-y-4">
             {order.items?.map((item, index) => (
               <div key={index} className="flex gap-4 border-b pb-4 last:border-0 last:pb-0">
@@ -122,7 +122,7 @@ export default function DashboardOrderPage({ params }) {
                   className="w-16 h-16 object-contain"
                 />
                 <div className="flex-1">
-                  <p className="font-semibold text-slate-900">{item.name}</p>
+                  <p className="font-semibold text-primary">{item.name}</p>
                   {item.customizations?.size && (
                     <p className="text-xs text-slate-500">Tamaño: {item.customizations.size.name}</p>
                   )}
@@ -147,7 +147,7 @@ export default function DashboardOrderPage({ params }) {
             ))}
           </div>
           <div className="mt-4 flex justify-between border-t pt-4">
-            <span className="font-semibold">Total</span>
+            <span className="font-semibold text-primary">Total</span>
             <span className="font-semibold text-primary">${order.total}</span>
           </div>
         </div>

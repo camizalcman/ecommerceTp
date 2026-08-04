@@ -19,7 +19,7 @@ export default async function DashboardOrdersPage() {
               <Link
                 key={order._id}
                 href={`/dashboard/order/${order._id}`}
-                className="block bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition"
+                className="block border border-primary bg-primary/10 rounded-2xl p-6 shadow-sm hover:shadow-md hover:bg-primary/20 transition"
               >
                 <div className="flex items-center justify-between">
                   <div>
