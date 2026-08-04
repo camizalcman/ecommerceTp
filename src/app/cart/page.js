@@ -98,7 +98,7 @@ export default function CartPage() {
         </div>
 
         <div className="flex w-full gap-6">
-          <Link href="/checkout" className="w-1/2 mt-10 block text-center border border-primary text-primary py-3 rounded-full font-semibold">
+          <Link href="/" className="w-1/2 mt-10 block text-center border border-primary text-primary py-3 rounded-full font-semibold">
           Volver al menú
           </Link>
           <Link href="/checkout" className="w-1/2 mt-10 block text-center bg-primary text-secondary py-3 rounded-full font-semibold hover:opacity-90 transition">

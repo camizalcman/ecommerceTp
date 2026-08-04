@@ -164,7 +164,7 @@ export default function CheckoutPage() {
 
           <div className="mt-4 space-y-4">
             {cart.map((item) => (
-              <div key={item.cartItemId} className="flex gap-4 bg-white rounded-xl p-4 shadow-sm">
+              <div key={item.cartItemId} className="flex gap-4 bg-primary/15 border border-primary rounded-xl p-4 shadow-sm">
                 <img
                   src={item.image ? `/images/products/${item.image}` : "/images/products/pizza.png"}
                   alt={item.name}
@@ -196,9 +196,9 @@ export default function CheckoutPage() {
             ))}
           </div>
 
-          <div className="mt-6 flex justify-between bg-white rounded-xl p-4 shadow-sm">
-            <span className="font-semibold">Total</span>
-            <span className="font-semibold text-primary">${cartTotal()}</span>
+          <div className="mt-6 flex justify-between rounded-xl bg-primary p-4 shadow-sm">
+            <span className="font-semibold text-secondary">Total</span>
+            <span className="font-semibold text-secondary">${cartTotal()}</span>
           </div>
         </div>
 
