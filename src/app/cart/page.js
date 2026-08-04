@@ -23,7 +23,7 @@ export default function CartPage() {
 
   return (
     <main className="min-h-screen bg-background px-6 py-12">
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-4xl w-full">
 
         <h1 className="text-3xl font-bold text-primary font-sora mb-8">Tu carrito</h1>
 
@@ -31,7 +31,7 @@ export default function CartPage() {
           {cart.map((item) => (
             <div
               key={item.cartItemId}
-              className="flex gap-6 bg-white rounded-xl p-6 shadow-sm"
+              className="flex gap-6 bg-primary/15 border border-primary rounded-xl p-6 shadow-sm"
             >
               <img
                 src={item.image ? `/images/products/${item.image}` : "/images/products/pizza.png"}
@@ -40,7 +40,7 @@ export default function CartPage() {
               />
 
               <div className="flex-1">
-                <h3 className="text-lg font-semibold text-slate-900">{item.name}</h3>
+                <h3 className="text-lg font-semibold font-sora text-primary">{item.name}</h3>
 
                 <div className="mt-1 space-y-0.5">
                   {item.customizations?.size && (
@@ -92,17 +92,20 @@ export default function CartPage() {
           ))}
         </div>
 
-        <div className="mt-10 flex items-center justify-between bg-white rounded-xl p-6 shadow-sm">
-          <span className="text-xl font-semibold">Total</span>
+        <div className="mt-8 flex items-center justify-between rounded-xl">
+          <span className="text-xl font-semibold font-sora text-primary">Total</span>
           <span className="text-xl font-semibold text-primary">${cartTotal()}</span>
         </div>
 
-        <Link
-          href="/checkout"
-          className="mt-6 block text-center bg-primary text-secondary py-4 rounded-full font-semibold hover:opacity-90 transition"
-        >
+        <div className="flex w-full gap-6">
+          <Link href="/checkout" className="w-1/2 mt-10 block text-center border border-primary text-primary py-3 rounded-full font-semibold">
+          Volver al menú
+          </Link>
+          <Link href="/checkout" className="w-1/2 mt-10 block text-center bg-primary text-secondary py-3 rounded-full font-semibold hover:opacity-90 transition">
           Continuar al checkout
-        </Link>
+          </Link>
+        </div>
+        
 
       </div>
     </main>
