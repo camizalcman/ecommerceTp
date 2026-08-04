@@ -7,9 +7,9 @@ export default async function DashboardOrdersPage() {
   const orders = await getOrders();
 
   return (
-    <main className="min-h-screen bg-slate-100 px-6 py-10">
+    <main className="min-h-screen bg-background px-6 py-10">
       <div className="mx-auto max-w-6xl">
-        <h1 className="text-3xl font-semibold mb-8 text-slate-900">Órdenes</h1>
+        <h1 className="text-3xl font-semibold mb-8 text-primary font-sora">Órdenes</h1>
 
         {orders.length === 0 ? (
           <p className="text-slate-500">No hay órdenes todavía.</p>

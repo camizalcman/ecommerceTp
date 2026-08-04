@@ -34,7 +34,7 @@ export default function Navbar() {
         
         <div className='flex gap-8 items-center'>
 
-          <Link href="/favorites" className='relative flex gap-1 justify-center items-center'>
+          <Link href="/favorites" className='relative flex gap-1 justify-center items-center text-sm'>
             <Heart className="h-5 w-5" strokeWidth={1.5} />
             Favoritos
             {favoritesQty() > 0 && (
@@ -44,7 +44,7 @@ export default function Navbar() {
             )}
           </Link>
 
-          <button onClick={openCart} className='relative flex gap-1 justify-center items-center'>
+          <button onClick={openCart} className='relative flex gap-1 justify-center items-center text-sm'>
             <ShoppingCart className="h-5 w-5" strokeWidth={1.5} />
             Carrito
             {cartQty() > 0 && (

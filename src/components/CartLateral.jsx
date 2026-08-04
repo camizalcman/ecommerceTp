@@ -26,7 +26,7 @@ export default function CartLateral() {
       />
 
       {/* Panel lateral */}
-      <div className="relative w-full max-w-md h-full bg-white shadow-xl flex flex-col">
+      <div className="relative w-full max-w-md h-full bg-background shadow-xl flex flex-col">
 
         <div className="flex items-center justify-between p-6 border-b">
           <h2 className="text-xl font-semibold text-primary font-sora">Carrito</h2>
