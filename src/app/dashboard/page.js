@@ -141,7 +141,7 @@ export default async function DashboardPage() {
                   <Link
                     key={order._id}
                     href={`/dashboard/order/${order._id}`}
-                    className="flex items-center justify-between bg-background border border-primary rounded-lg p-3 transition"
+                    className="flex items-center justify-between bg-white rounded-lg p-3"
                   >
                     <div>
                       <p className="text-sm font-medium text-slate-900">#{order.orderNumber}</p>
@@ -172,15 +172,15 @@ export default async function DashboardPage() {
             {lastUsers.length === 0 ? (
               <p className="text-secondary text-sm">No hay usuarios todavía.</p>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-3 bg-white rounded-lg">
                 {lastUsers.map((user) => (
-                  <div key={user._id} className="flex items-center gap-3 p-2">
-                    <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-primary font-semibold text-sm">
+                  <div key={user._id} className="flex items-center gap-3 p-3">
+                    <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-secondary font-semibold text-sm">
                       {user.name?.charAt(0).toUpperCase()}
                     </div>
                     <div>
-                      <p className="text-sm font-medium text-secondary">{user.name}</p>
-                      <p className="text-xs text-secondary">{user.email}</p>
+                      <p className="text-sm font-medium text-primary">{user.name}</p>
+                      <p className="text-xs text-primary">{user.email}</p>
                     </div>
                   </div>
                 ))}

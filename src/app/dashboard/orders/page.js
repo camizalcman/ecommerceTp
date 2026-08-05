@@ -8,7 +8,10 @@ export default async function DashboardOrdersPage() {
 
   return (
     <main className="min-h-screen bg-background px-6 py-10">
-      <div className="mx-auto max-w-6xl">
+      <Link href="/dashboard" className="text-sm text-primary">
+                Volver al dashboard
+      </Link>
+      <div className="mx-auto max-w-6xl mt-4">
         <h1 className="text-3xl font-semibold mb-8 text-primary font-sora">Órdenes</h1>
 
         {orders.length === 0 ? (
