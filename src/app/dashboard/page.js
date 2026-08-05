@@ -2,6 +2,8 @@ import Link from "next/link";
 import { getOrders } from "@/lib/orders";
 import { getUsers } from "@/lib/users";
 import { ArrowRight } from "lucide-react";
+import DashboardCharts from "@/components/DashboardCharts";
+
 
 export const dynamic = "force-dynamic";
 
@@ -24,6 +26,36 @@ export default async function DashboardPage() {
       );
     })
     .reduce((acc, order) => acc + order.total, 0);
+
+    const MONTHS = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+
+    // Órdenes por mes
+    const ordersData = MONTHS.map((month, i) => ({
+      month,
+      value: orders.filter((o) => new Date(o.createdAt).getMonth() === i).length,
+    }));
+
+    // Facturación por mes
+    const revenueData = MONTHS.map((month, i) => ({
+      month,
+      value: orders
+        .filter((o) => new Date(o.createdAt).getMonth() === i)
+        .reduce((acc, o) => acc + o.total, 0),
+    }));
+
+    // Usuarios por mes
+    const usersData = MONTHS.map((month, i) => ({
+      month,
+      value: users.filter((u) => new Date(u.createdAt).getMonth() === i).length,
+    }));
+
+    // Pizzas vendidas por mes
+    const pizzasData = MONTHS.map((month, i) => ({
+      month,
+      value: orders
+        .filter((o) => new Date(o.createdAt).getMonth() === i)
+        .reduce((acc, o) => acc + o.items.reduce((a, item) => a + item.quantity, 0), 0),
+    }));
 
   return (
     <main className="min-h-screen bg-background px-6 py-10 text-slate-900">
@@ -157,6 +189,17 @@ export default async function DashboardPage() {
           </div>
 
         </div>
+
+        <div className="w-full">
+              <DashboardCharts 
+              ordersData={ordersData}
+              revenueData={revenueData}
+              usersData={usersData}
+              pizzasData={pizzasData}
+            />
+
+          </div>
+          
 
       </div>
     </main>
