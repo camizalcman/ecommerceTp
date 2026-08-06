@@ -39,7 +39,7 @@ const [animating, setAnimating] = useState(false);
 
       </h1>
 
-      <h2 className="font-sora font-semibold text-primary text-lg sm:text-xl md:text-2xl mt-6 max-w-md mx-auto lg:mx-0">Elegí tus ingredientes para armar una pizza única, preparada especialmente para vos.
+      <h2 className="font-sora font-semibold text-primary text-lg sm:text-xl md:text-2xl mt-6 mx-auto lg:mx-0">Elegí tus ingredientes para armar una pizza única, preparada especialmente para vos.
       </h2>
 
       <div className="flex flex-col sm:flex-row gap-4 mt-12 justify-center lg:justify-start">
