@@ -7,7 +7,6 @@ import { Heart, ShoppingCart, User, LogOut } from "lucide-react";
 const links = [
   { href: "/", label: "Home" },
   { href: "/categories", label: "Categorías" },
-  { href: "/dashboard", label: "Dashboard" },
 ];
 
 export default function Navbar() {
@@ -30,6 +29,16 @@ export default function Navbar() {
           {link.label}
         </Link>
       ))}
+
+      {activeUser?.role === "admin" && (
+        <Link
+          className="rounded-lg px-3 py-2 text-sm font-medium"
+          href="/dashboard"
+        >
+          Dashboard
+        </Link>
+      )}
+
     </div>
 
     {/* Acciones */}

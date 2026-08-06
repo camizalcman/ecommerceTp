@@ -4,7 +4,6 @@ import Link from "next/link"
 const links = [
   { href: "/", label: "Home" },
   { href: "/categories", label: "Categorias" },
-  { href: "/dashboard", label: "Dashboard" },
 ];
 
 const Footer = () => {

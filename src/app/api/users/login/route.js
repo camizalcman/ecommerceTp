@@ -21,6 +21,7 @@ export async function POST(request) {
       _id: user._id.toString(),
       name: user.name,
       email: user.email,
+      role: user.role
     });
   } catch (error) {
     return Response.json({ message: error.message }, { status: 500 });
