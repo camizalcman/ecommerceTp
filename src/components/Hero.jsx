@@ -32,37 +32,34 @@ const [animating, setAnimating] = useState(false);
   };
 
   return (
-  <div className="flex flex-col lg:flex-row items-center">
-    
-    <div className="w-full lg:w-1/2 flex flex-col justify-center text-left">
+  <div className="flex flex-col lg:flex-row items-center py-8 lg:py-16 gap-8 lg:gap-0">    
+    <div className="w-full lg:w-1/2 flex flex-col justify-center text-center lg:text-left order-2 lg:order-1">
       <h1 className="font-sora font-bold text-primary text-4xl sm:text-4xl md:text-5xl">
         Hechas a tu gusto
 
       </h1>
 
-      <h2 className="font-sora font-semibold text-primary text-lg sm:text-xl md:text-2xl mt-6">
-        Elegí tus ingredientes para armar una pizza única, preparada especialmente para vos.
+      <h2 className="font-sora font-semibold text-primary text-lg sm:text-xl md:text-2xl mt-6 max-w-md mx-auto lg:mx-0">Elegí tus ingredientes para armar una pizza única, preparada especialmente para vos.
       </h2>
 
       <div className="flex flex-col sm:flex-row gap-4 mt-12 justify-center lg:justify-start">
         <a
           href="#menu"
-          className="bg-primary text-secondary rounded-full px-8 md:px-12 py-3 transition-all duration-300 hover:opacity-90 hover:scale-105"
+          className="bg-primary text-secondary text-center rounded-full px-8 md:px-12 py-3 transition-all duration-300 hover:opacity-90 hover:scale-105"
         >
           Ver menú
         </a>
 
         <Link
           href={`/product/6a378a5d20610ecf6443dfdf`}
-          className="inline-block border-2 border-primary text-primary rounded-full px-8 md:px-12 py-3 transition-all duration-300 hover:scale-105"
+          className="text-center inline-block border-2 border-primary text-primary rounded-full px-8 md:px-12 py-3 transition-all duration-300 hover:scale-105"
         >
           Creá tu pizza
         </Link>
       </div>
     </div>
 
-    <div className="w-full lg:w-1/2 flex flex-col items-center gap-2 mt-10 lg:mt-0">
-
+    <div className="w-full lg:w-1/2 flex flex-col items-center gap-2 mt-10 lg:mt-0 order-1 lg:order-2">
       <button
         onClick={handleNext}
         className="text-primary hover:text-primary-hover transition-colors text-2xl md:text-3xl"
@@ -70,7 +67,7 @@ const [animating, setAnimating] = useState(false);
         <MoveRight className="w-6 h-6 text-primary" />
       </button>
 
-      <div className="relative w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px]">
+      <div className="relative w-[280px] h-[280px] sm:h-[350px] md:h-[450px] lg:w-[550px]">
         {pizzas.map((pizza, index) => (
           <Image
             key={index}

@@ -5,7 +5,7 @@ import { useAppContext } from "@/contexts/AppContext";
 import { Heart } from "lucide-react";
 
 export default function ProductDetail({ product, isCustomizable, options }) {
-  const { addToCart } = useAppContext();
+  const { addToCart, addFavorite, removeFavorite, isFavorite } = useAppContext();
 
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedDough, setSelectedDough] = useState(null);
@@ -25,7 +25,7 @@ export default function ProductDetail({ product, isCustomizable, options }) {
   };
 
   const handleAddToCart = () => {
-     if (!selectedSize) {
+    if (!selectedSize) {
       alert("Por favor elegí un tamaño antes de agregar al carrito");
       return;
     }
@@ -59,8 +59,6 @@ export default function ProductDetail({ product, isCustomizable, options }) {
   // si no eligió ninguna, se muestra la "Común" por defecto (sin necesidad de seleccionarla)
   const doughToShow = selectedDough || options.doughs?.find(d => d.name === "Común");
 
-  const { addFavorite, removeFavorite, isFavorite } = useAppContext();
-
   const toggleFavorite = () => {
     if (isFavorite(product._id)) {
       removeFavorite(product._id);
@@ -70,22 +68,22 @@ export default function ProductDetail({ product, isCustomizable, options }) {
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-6">
+    <div className="max-w-7xl mx-auto p-4 lg:p-6">
       <div className="flex flex-col lg:flex-row gap-12">
 
         {/* Imagen fija con capas */}
         <div className="w-full lg:w-1/2">
           <div className="lg:sticky lg:top-24 flex justify-center items-center">
-            <div className="relative w-[600px] h-[600px] aspect-square">
+            <div className="relative w-[280px] h-[280px] sm:w-[400px] sm:h-[400px] lg:w-[600px] lg:h-[600px] aspect-square">
 
-               {/* NO personalizable → imagen fija siempre */}
-                {!isCustomizable && (
-                  <img
-                    src={`/images/products/${product.image}`}
-                    alt={product.name}
-                    className="absolute inset-0 w-full h-full object-contain"
-                  />
-                )}
+              {/* NO personalizable → imagen fija siempre */}
+              {!isCustomizable && (
+                <img
+                  src={`/images/products/${product.image}`}
+                  alt={product.name}
+                  className="absolute inset-0 w-full h-full object-contain"
+                />
+              )}
 
               {/* Personalizable → capas dinámicas */}
               {isCustomizable && (
@@ -129,8 +127,8 @@ export default function ProductDetail({ product, isCustomizable, options }) {
         {/* Contenido con línea de progreso */}
         <div className="w-full lg:w-1/2 relative">
 
-          <div className="flex items-center justify-between mt-10">
-            <h1 className="text-3xl font-bold text-primary font-sora">{product.name}</h1>
+          <div className="flex items-center justify-between mt-4 lg:mt-10">
+            <h1 className="text-2xl lg:text-3xl font-bold text-primary font-sora">{product.name}</h1>
             <button onClick={toggleFavorite}>
               <Heart
                 className={`h-6 w-6 text-primary ${
@@ -170,78 +168,77 @@ export default function ProductDetail({ product, isCustomizable, options }) {
             </div>
 
             {/* Masa */}
+            <div className="relative mb-12">
+              <span className={`absolute -left-8 top-1 w-4 h-4 rounded-full border-2 ${
+                selectedDough ? "bg-primary border-primary" : "bg-white border-primary"
+              }`} />
+              <h2 className="font-semibold text-lg">Masa</h2>
+              <div className="flex flex-wrap gap-3 mt-2">
+                {options.doughs?.map(dough => (
+                  <button
+                    key={dough._id}
+                    onClick={() => setSelectedDough(dough)}
+                    className={`px-3 py-2 text-sm rounded-full border transition-all duration-300 ${
+                      selectedDough?._id === dough._id
+                        ? "bg-primary border-primary text-secondary"
+                        : "border-gray-300 hover:bg-primary hover:border-primary hover:text-secondary"
+                    }`}
+                  >
+                    {dough.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {isCustomizable && (
+              <>
+                {/* Salsa */}
                 <div className="relative mb-12">
                   <span className={`absolute -left-8 top-1 w-4 h-4 rounded-full border-2 ${
-                    selectedDough ? "bg-primary border-primary" : "bg-white border-primary"
+                    selectedSauce ? "bg-primary border-primary" : "bg-white border-primary"
                   }`} />
-                  <h2 className="font-semibold text-lg">Masa</h2>
+                  <h2 className="font-semibold text-lg">Salsa</h2>
                   <div className="flex flex-wrap gap-3 mt-2">
-                    {options.doughs?.map(dough => (
+                    {options.sauces?.map(sauce => (
                       <button
-                        key={dough._id}
-                        onClick={() => setSelectedDough(dough)}
+                        key={sauce._id}
+                        onClick={() => setSelectedSauce(sauce)}
                         className={`px-3 py-2 text-sm rounded-full border transition-all duration-300 ${
-                          selectedDough?._id === dough._id
+                          selectedSauce?._id === sauce._id
                             ? "bg-primary border-primary text-secondary"
                             : "border-gray-300 hover:bg-primary hover:border-primary hover:text-secondary"
                         }`}
                       >
-                        {dough.name}
+                        {sauce.name}
                       </button>
                     ))}
                   </div>
                 </div>
+              </>
+            )}
 
-                {isCustomizable && (
-                <>
-                  {/* Salsa */}
-                  <div className="relative mb-12">
-                    <span className={`absolute -left-8 top-1 w-4 h-4 rounded-full border-2 ${
-                      selectedSauce ? "bg-primary border-primary" : "bg-white border-primary"
-                    }`} />
-                    <h2 className="font-semibold text-lg">Salsa</h2>
-                    <div className="flex flex-wrap gap-3 mt-2">
-                      {options.sauces?.map(sauce => (
-                        <button
-                          key={sauce._id}
-                          onClick={() => setSelectedSauce(sauce)}
-                          className={`px-3 py-2 text-sm rounded-full border transition-all duration-300 ${
-                            selectedSauce?._id === sauce._id
-                              ? "bg-primary border-primary text-secondary"
-                              : "border-gray-300 hover:bg-primary hover:border-primary hover:text-secondary"
-                          }`}
-                        >
-                          {sauce.name}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </>
-              )}
-
-                {/* Mozzarella */}
-                <div className="relative mb-12">
-                  <span className={`absolute -left-8 top-1 w-4 h-4 rounded-full border-2 ${
-                    selectedMozzarella ? "bg-primary border-primary" : "bg-white border-primary"
-                  }`} />
-                  <h2 className="font-semibold text-lg">Mozzarella</h2>
-                  <div className="flex flex-wrap gap-3 mt-2">
-                    {options.mozzarellas?.map(mozzarella => (
-                      <button
-                        key={mozzarella._id}
-                        onClick={() => setSelectedMozzarella(mozzarella)}
-                        className={`px-3 py-2 text-sm rounded-full border transition-all duration-300 ${
-                          selectedMozzarella?._id === mozzarella._id
-                            ? "bg-primary border-primary text-secondary"
-                            : "border-gray-300 hover:bg-primary hover:border-primary hover:text-secondary"
-                        }`}
-                      >
-                        {mozzarella.name}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                
+            {/* Mozzarella */}
+            <div className="relative mb-12">
+              <span className={`absolute -left-8 top-1 w-4 h-4 rounded-full border-2 ${
+                selectedMozzarella ? "bg-primary border-primary" : "bg-white border-primary"
+              }`} />
+              <h2 className="font-semibold text-lg">Mozzarella</h2>
+              <div className="flex flex-wrap gap-3 mt-2">
+                {options.mozzarellas?.map(mozzarella => (
+                  <button
+                    key={mozzarella._id}
+                    onClick={() => setSelectedMozzarella(mozzarella)}
+                    className={`px-3 py-2 text-sm rounded-full border transition-all duration-300 ${
+                      selectedMozzarella?._id === mozzarella._id
+                        ? "bg-primary border-primary text-secondary"
+                        : "border-gray-300 hover:bg-primary hover:border-primary hover:text-secondary"
+                    }`}
+                  >
+                    {mozzarella.name}
+                  </button>
+                ))}
+              </div>
+            </div>
 
             {isCustomizable && (
               <>
