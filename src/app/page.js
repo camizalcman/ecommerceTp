@@ -14,7 +14,6 @@ export default async function Home() {
         <Hero/>
         <section id="menu" className="mb-8 mt-16">
           <ProductSearch products={products} />
-          <ProductGrid products={products} />
         </section>
       </div>
     </main>
