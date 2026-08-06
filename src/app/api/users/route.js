@@ -1,7 +1,7 @@
 import { connectDB } from "@/lib/mongodb";
 import User from "@/models/User";
 
-// POST /api/users → registro
+
 export async function POST(request) {
   try {
     const body = await request.json();

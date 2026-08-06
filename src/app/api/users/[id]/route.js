@@ -1,6 +1,6 @@
 import { getUserById } from "@/lib/users";
 
-// GET /api/users/123 → obtener usuario por ID
+// Obtener usuario por ID
 export async function GET(_request, { params }) {
   try {
     const { id } = await params;

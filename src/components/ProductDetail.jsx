@@ -55,8 +55,8 @@ export default function ProductDetail({ product, isCustomizable, options }) {
       ]
     : [!!selectedSize];
 
-  // si el usuario eligió una masa, usás esa
-  // si no eligió ninguna, se muestra la "Común" por defecto (sin necesidad de seleccionarla)
+  //Si el usuario eligió una masa, se selecciona esa
+  //Si no eligió ninguna, se muestra la "Común" por defecto
   const doughToShow = selectedDough || options.doughs?.find(d => d.name === "Común");
 
   const toggleFavorite = () => {
