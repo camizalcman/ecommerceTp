@@ -51,19 +51,19 @@ export default function UserOrderPage({ params }) {
 
         <Link
           href="/user"
-          className="text-sm text-primary hover:underline"
+          className="text-sm text-primary"
         >
-          ← Volver a mis pedidos
+        Volver a mis pedidos
         </Link>
 
         {/* Encabezado */}
-        <div className="mt-6 bg-white rounded-2xl p-6 shadow-sm">
+        <div className="mt-6 bg-primary/70 rounded-2xl p-6 shadow-sm">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-primary font-sora">
+              <h1 className="text-2xl font-bold text-secondary font-sora">
                 Orden #{order.orderNumber}
               </h1>
-              <p className="text-sm text-slate-500 mt-1">
+              <p className="text-sm text-secondary mt-1">
                 {new Date(order.createdAt).toLocaleDateString("es-AR", {
                   day: "numeric",
                   month: "long",
@@ -85,7 +85,7 @@ export default function UserOrderPage({ params }) {
         </div>
 
         {/* Datos de contacto */}
-        <div className="mt-4 bg-white rounded-2xl p-6 shadow-sm">
+        <div className="mt-4 bg-background border border-primary rounded-2xl p-6 shadow-sm">
           <h2 className="font-semibold text-slate-900 mb-3">Datos de entrega</h2>
           <div className="space-y-1 text-sm text-slate-600">
             <p><span className="font-medium">Nombre:</span> {order.contactInfo?.name}</p>
@@ -99,7 +99,7 @@ export default function UserOrderPage({ params }) {
         </div>
 
         {/* Productos */}
-        <div className="mt-4 bg-white rounded-2xl p-6 shadow-sm">
+        <div className="mt-4 bg-primary/10 border border-primary rounded-2xl p-6 shadow-sm">
           <h2 className="font-semibold text-slate-900 mb-4">Productos</h2>
           <div className="space-y-4">
             {order.items?.map((item, index) => (

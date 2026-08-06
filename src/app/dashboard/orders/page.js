@@ -8,11 +8,11 @@ export default async function DashboardOrdersPage() {
 
   return (
     <main className="min-h-screen bg-background px-6 py-10">
-      <Link href="/dashboard" className="text-sm text-primary">
+      <div className="mx-auto max-w-6xl mt-4">
+        <Link href="/dashboard" className="text-sm text-primary">
                 Volver al dashboard
       </Link>
-      <div className="mx-auto max-w-6xl mt-4">
-        <h1 className="text-3xl font-semibold mb-8 text-primary font-sora">Órdenes</h1>
+        <h1 className="text-3xl font-semibold mb-8 text-primary font-sora mt-4">Órdenes</h1>
 
         {orders.length === 0 ? (
           <p className="text-slate-500">No hay órdenes todavía.</p>
@@ -26,7 +26,7 @@ export default async function DashboardOrdersPage() {
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="font-semibold text-slate-900">Orden #{order.orderNumber}</p>
+                    <p className="font-semibold text-primary">Orden #{order.orderNumber}</p>
                     <p className="text-sm text-slate-500 mt-1">
                       {order.user?.name} — {order.user?.email}
                     </p>
