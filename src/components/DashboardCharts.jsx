@@ -24,7 +24,7 @@ export default function DashboardCharts({ ordersData, revenueData, usersData, pi
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 w-full">
         {charts.map((chart) => (
           <div key={chart.title} className="bg-white rounded-2xl p-6 shadow-sm w-full">
-            <h3 className="font-semibold text-slate-900 font-sora mb-4">{chart.title}</h3>
+            <h3 className="font-semibold text-primary font-sora mb-4">{chart.title}</h3>
             <ResponsiveContainer width="100%" height={200}>
             <BarChart width={500} height={200} data={chart.data}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />

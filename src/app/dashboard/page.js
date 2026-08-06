@@ -8,14 +8,17 @@ import DashboardCharts from "@/components/DashboardCharts";
 export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
+  //Trae las ordenes y usuarios
   const [orders, users] = await Promise.all([
     getOrders(),
     getUsers(),
   ]);
 
+  //Se muestran solo los últimos 5 registros en las tablas del dashboard
   const lastOrders = orders.slice(0, 5);
   const lastUsers = users.slice(0, 5);
 
+  // Calcula la facturación acumulada del mes actual
   const now = new Date();
   const totalThisMonth = orders
     .filter((order) => {
@@ -35,7 +38,7 @@ export default async function DashboardPage() {
       value: orders.filter((o) => new Date(o.createdAt).getMonth() === i).length,
     }));
 
-    // Facturación por mes
+    //Facturación por mes
     const revenueData = MONTHS.map((month, i) => ({
       month,
       value: orders
@@ -43,13 +46,13 @@ export default async function DashboardPage() {
         .reduce((acc, o) => acc + o.total, 0),
     }));
 
-    // Usuarios por mes
+    //Usuarios por mes
     const usersData = MONTHS.map((month, i) => ({
       month,
       value: users.filter((u) => new Date(u.createdAt).getMonth() === i).length,
     }));
 
-    // Pizzas vendidas por mes
+    //Pizzas vendidas por mes
     const pizzasData = MONTHS.map((month, i) => ({
       month,
       value: orders
