@@ -33,13 +33,14 @@ export default function UserPage() {
 
   return (
     <main className="min-h-screen bg-background px-6 py-12">
+      
       <div className="mx-auto max-w-4xl">
-
+      <Link href="/dashboard" className="text-sm text-primary">Volver al dashboard</Link>
         {/* Datos del usuario */}
-        <div className="bg-white rounded-2xl p-6 shadow-sm">
-          <h1 className="text-3xl font-bold text-primary font-sora">Mi cuenta</h1>
-          <p className="mt-2 text-slate-600">{activeUser?.name}</p>
-          <p className="text-slate-500 text-sm">{activeUser?.email}</p>
+        <div className="bg-primary/70 rounded-2xl p-6 shadow-sm mt-4">
+          <h1 className="text-sm text-secondary">Mi cuenta</h1>
+          <p className="text-3xl font-bold text-secondary font-sora">{activeUser?.name}</p>
+          <p className="text-sm text-secondary">{activeUser?.email}</p>
         </div>
 
         {/* Órdenes */}
@@ -62,11 +63,11 @@ export default function UserPage() {
                 <Link
                   key={order._id}
                   href={`/user/order/${order._id}`}
-                  className="block bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition"
+                  className="block bg-primary/10 rounded-2xl p-6 shadow-sm hover:shadow-md transition border border-primary"
                 >
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="font-semibold text-slate-900">
+                      <p className="font-semibold text-primary">
                         Orden #{order.orderNumber}
                       </p>
                       <p className="text-sm text-slate-500 mt-1">
