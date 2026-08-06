@@ -7,7 +7,7 @@ export async function sendOrderConfirmationEmail({ to, orderNumber, items, total
     .map((item) => `- ${item.name} x${item.quantity}: $${item.subtotal}`)
     .join("\n");
 
-  // Email al usuario
+  //Email para el usuario
   const userMsg = {
     to,
     from: process.env.SENDGRID_FROM_EMAIL,
@@ -15,7 +15,7 @@ export async function sendOrderConfirmationEmail({ to, orderNumber, items, total
     text: `
 Hola ${contactInfo.name}!
 
-Tu pedido fue recibido correctamente.
+Tu pedido fue recibido correctamente y ya está en preparación.
 
 Número de orden: #${orderNumber}
 
@@ -30,7 +30,7 @@ Dirección de entrega: ${contactInfo.address}
     `,
     html: `
 <h2>¡Hola ${contactInfo.name}!</h2>
-<p>Tu pedido fue recibido correctamente.</p>
+<p>Tu pedido fue recibido correctamente y ya está en preparación</p>
 <h3>Número de orden: #${orderNumber}</h3>
 <ul>
   ${items.map((item) => `<li>${item.name} x${item.quantity}: $${item.subtotal}</li>`).join("")}
@@ -41,13 +41,13 @@ Dirección de entrega: ${contactInfo.address}
     `,
   };
 
-  // Email al admin
+  //Email al admin
   const adminMsg = {
     to: process.env.SENDGRID_OWNER_EMAIL,
     from: process.env.SENDGRID_FROM_EMAIL,
     subject: `Nueva orden recibida #${orderNumber}`,
     text: `
-Nueva orden recibida!
+¡Nueva orden recibida!
 
 Número de orden: #${orderNumber}
 Cliente: ${contactInfo.name} (${to})

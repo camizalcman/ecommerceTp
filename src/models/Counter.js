@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
-// Esta colección guarda un contador para generar
-// números de orden secuenciales (1000, 1001, 1002...)
+//Guarda un contador para generar números de orden secuenciales para las órdenes
 const counterSchema = new mongoose.Schema({
   _id: { type: String, required: true },
   seq: { type: Number, default: 1000 },

@@ -2,7 +2,6 @@ import { connectDB } from "@/lib/mongodb";
 import Order from "@/models/Order";
 import { getOrderById } from "@/lib/orders";
 
-// GET /api/orders/123 → obtener orden por ID
 export async function GET(_request, { params }) {
   try {
     const { id } = await params;
@@ -18,7 +17,7 @@ export async function GET(_request, { params }) {
   }
 }
 
-// PUT /api/orders/123 → cambiar estado de la orden (admin)
+
 export async function PUT(request, { params }) {
   try {
     const { id } = await params;

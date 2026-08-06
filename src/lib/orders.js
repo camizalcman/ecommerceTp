@@ -16,8 +16,7 @@ function serializeOrder(order) {
   };
 }
 
-// Genera el próximo número de orden secuencial
-// Arranca en 1000 y va sumando de a uno
+//Genera el próximo número de orden secuencial
 export async function getNextOrderNumber() {
   await connectDB();
   const counter = await Counter.findByIdAndUpdate(

@@ -95,17 +95,17 @@ export const AppContextProvider = ({children}) => {
         setActiveUser(userData);
 
         try {
-            // 1. Traer favoritos persistidos de la DB
+            //Traer favoritos persistidos de la DB
             const res = await fetch(`/api/users/${userData._id}/favorites`);
             const data = await res.json();
             const persistedFavorites = data.favorites || [];
 
-            // 2. Combinar con favoritos temporales evitando duplicados
+            //Combinar con favoritos temporales evitando duplicados
             const persistedIds = persistedFavorites.map(f => f._id);
             const temporaryFavorites = favorites.filter(f => !persistedIds.includes(f._id));
             const combined = [...persistedFavorites, ...temporaryFavorites];
 
-            // 3. Sincronizar los temporales con MongoDB si los hay
+            //Sincronizar los temporales con MongoDB si los hay
             if (temporaryFavorites.length > 0) {
                 await fetch(`/api/users/${userData._id}/favorites`, {
                     method: "PUT",
@@ -116,7 +116,7 @@ export const AppContextProvider = ({children}) => {
                 });
             }
 
-            // 4. Actualizar el context con todos los favoritos
+            //Actualizar el context con todos los favoritos
             setFavorites(combined);
 
         } catch (error) {
@@ -134,7 +134,7 @@ export const AppContextProvider = ({children}) => {
 
     return (
         //va a exportar un componente que se llama app context y utiliza el metodo provider
-        //value son las cosas que queres dejar publicas y exportar
+        //value son las cosas que se dejan publicas y se exportan
         <AppContext.Provider value={{favorites, setFavorites, favoritesQty, addFavorite, removeFavorite, isFavorite,
     cart, setCart, addToCart, removeFromCart, updateQuantity, clearCart, cartTotal, cartQty, isCartOpen, openCart, closeCart,
     activeUser, login, logout }}>

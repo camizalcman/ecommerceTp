@@ -3,7 +3,7 @@ import Order from "@/models/Order";
 import { getNextOrderNumber } from "@/lib/orders";
 import { sendOrderConfirmationEmail } from "@/lib/email";
 
-// POST /api/orders → crear orden
+//Crear orden
 export async function POST(request) {
   try {
     const body = await request.json();
@@ -42,7 +42,7 @@ export async function POST(request) {
   }
 }
 
-// GET /api/orders → listar todas las órdenes (admin)
+//Ver todas las órdenes 
 export async function GET() {
   try {
     const { getOrders } = await import("@/lib/orders");
